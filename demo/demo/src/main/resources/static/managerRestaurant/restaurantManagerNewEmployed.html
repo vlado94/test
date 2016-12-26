@@ -1,0 +1,40 @@
+<div class = "col-sm-2">
+<form  name = "new" ng-model="$parent.employed">
+	<label> Employed type</label>
+	<select class = "form-control" ng-model="$parent.employedType"
+		ng-options="option as option for option in ['Waiter', 'Cook', 'Bartender']" required>
+    	<option value="" selected hidden />
+    </select>
+    
+    
+    <label>Mail</label>
+    <input name = "name" type="mail" class="form-control" ng-model = "$parent.employed.mail" required>  
+
+    <label>Password</label>
+    <input name = "lastname" type="text" class="form-control" ng-model = "$parent.employed.password" required>  
+
+    <label>Firstname</label>
+    <input name = "mail" type="text" class="form-control" ng-model = "$parent.employed.firstname" required>  
+
+    <label>Lastname</label>
+    <input name = "price" type="text" class="form-control" ng-model = "$parent.employed.lastname" required>  
+	
+	
+	
+	<label> Clothes size</label>
+	<select class = "form-control" ng-model="$parent.employed.clothesSize"
+		ng-options="option as option for option in ['S', 'M', 'L','XL','XXL']" required>
+    	<option value="" selected hidden />
+    </select>
+	
+	<label> Shoes size</label>
+	<select class = "form-control" ng-model="$parent.employed.shoesSize"
+		ng-options="option as option for option in ['no38', 'no39', 'no40','no41','no42','no43', 'no44', 'no45','no46']" required>
+    	<option value="" selected hidden />
+    </select>
+
+<button class="btn btn-default" ng-click="new.$valid &&  saveEmployed()"><span class="glyphicon glyphicon-ok" ></span> Create</button>
+<button class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove" ></span> Cancel</button>
+</form>
+
+</div>

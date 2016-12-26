@@ -1,0 +1,30 @@
+ <div>
+	<h1>Boss manager</h1>
+	
+	<h4>System managers:</h4>
+	<table  class="table table-bordered tableBG" border="1">
+		<tbody>
+	        <tr>
+				<th>Id</th>
+				<th>Firstame</th>
+                <th>Lastname</th>
+                <th>Mail</th>
+            </tr>
+			<tr ng-repeat="systemManager in systemMenagers">
+				<td> 
+					{{systemManager.id}}
+				</td>
+				<td>
+		    		{{systemManager.firstname}}	
+				</td>
+            	<td>
+		    		{{systemManager.lastname}}	
+				</td>
+            	<td>
+		    		{{systemManager.mail}}	
+				</td>
+			</tr>
+		</tbody>
+    </table> 
+</div>
+

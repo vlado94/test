@@ -1,0 +1,19 @@
+<div class = "col-sm-2">
+<form  name = "new" ng-model="$parent.bidder">
+    <label>Mail</label>
+    <input name = "name" type="mail" class="form-control" ng-model = "$parent.bidder.mail" required>  
+
+    <label>Password</label>
+    <input name = "lastname" type="text" class="form-control" ng-model = "$parent.bidder.password" required>  
+
+    <label>Firstname</label>
+    <input name = "mail" type="text" class="form-control" ng-model = "$parent.bidder.firstname" required>  
+
+    <label>Lastname</label>
+    <input name = "price" type="text" class="form-control" ng-model = "$parent.bidder.lastname" required>  
+
+<button class="btn btn-default" ng-click="new.$valid &&  saveBidder()"><span class="glyphicon glyphicon-ok" ></span> Create</button>
+<button class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove" ></span> Cancel</button>
+</form>
+
+</div>

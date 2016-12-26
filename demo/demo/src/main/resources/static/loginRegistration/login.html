@@ -1,0 +1,33 @@
+ <nav class="navbar navbar-inverse" role="navigation"> 
+      <ul class="nav navbar-nav">
+           <li><a>WELCOME</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">         
+          <li><a ui-sref="registration">Sign up</a></li>
+           <li><a >Log In using Google+</a></li>
+           <li><a >Log in using Facebook</a></li>
+      </ul>
+ </nav>
+ 
+ 
+
+
+<br/> <br/>
+
+
+
+
+<div class="center">
+ 
+ <form  name = "loginForm">
+
+<label>Email</label><br/>
+<input name = "email" type="mail" ng-model = "$parent.user.mail" class="form-control"  required><br/>  
+
+ <label>Password</label><br/>
+ <input name = "password" type="password" ng-model = "$parent.user.password" class="form-control"  required></br><br/>
+
+<button class="btn btn-default" ng-click="loginForm.$valid && submitLogin()">Log In </button>
+</form>
+</div>
+

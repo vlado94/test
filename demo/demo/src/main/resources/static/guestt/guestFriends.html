@@ -1,0 +1,94 @@
+<h1>Friends</h1><br/><hr/>
+
+
+
+
+<!--  Deo koji prikazuje zahteve za prijateljstvo koje je gost primio, ako ih ima -->
+<ul ng-init="getRequests()">
+	<li ng-repeat="friend in recivedPending ">
+		<h3>You received a friend request from {{friend.friendSendRequest.firstname}} {{friend.friendSendRequest.lastname}}
+		<button class="btn btn-default navbar-btn" ng-click="acceptRequest(friend.friendSendRequest.id)">Accept</button>
+		<button class="btn btn-default navbar-btn" ng-click="rejectRequest(friend.friendSendRequest.id)">Decline</button>	 	
+		</h3>
+	</li>
+</ul>
+
+
+
+
+
+
+<!-- Deo koji prikazuje sve gostove prijatelje sa njihovim statusima(pending, friends, rejected) -->
+<table ng-init="listFriends()"  class="table table-bordered tableBG" border="1">
+		<tbody>
+	        <tr>
+				<th>Firstame</th>
+                <th>Lastname</th>
+                <th>Mail</th>
+                <th>Status</th>
+                <th>&nbsp</th>
+            </tr>
+			<tr ng-repeat="friend in friends">
+				<td> 
+					{{friend.guest.firstname}}
+				</td>
+				<td>
+		    		{{friend.guest.lastname}}	
+				</td>
+            	<td>
+		    		{{friend.guest.mail}}	
+				</td>
+				<td>
+					{{friend.status}}
+				</td>
+				<td>
+					<button class="btn btn-default navbar-btn" ng-click="unfriend(friend.id)">Unfriend</button>
+				</td>
+				
+			</tr>
+		</tbody>
+    </table>  
+
+
+
+
+
+
+
+
+
+
+<!--  Deo koji omogucuje pretragu prijatelja -->
+<hr/>
+<div id="friendFind">
+<label>Find friends</label>
+<form>
+<input placeholder="Enter firstname or lastname" type="text" class="form-control x3" ng-model = "$parent.inputStr" ng-change = "findFriends()" >
+</form>
+
+<table  class="table table-bordered tableBG" border="1">
+		<tbody>
+	        <tr>
+				<th>Firstame</th>
+                <th>Lastname</th>
+                <th>Mail</th>
+                <th>&nbsp</th>
+            </tr>
+			<tr ng-repeat="guest in guests">
+				<td> 
+					{{guest.firstname}}
+				</td>
+				<td>
+		    		{{guest.lastname}}	
+				</td>
+            	<td>
+		    		{{guest.mail}}	
+				</td>
+				<td>
+					<button class="btn btn-default navbar-btn" ng-click="sendRequest(guest.id)"> Send request</button>
+				</td>
+				
+			</tr>
+		</tbody>
+    </table>  
+</div>

@@ -1,0 +1,20 @@
+<h1>ready orders</h1>
+
+<table class = "table table-bordered tableBG" border="1">
+	<tbody>
+		<tr ng-repeat = "order in orders">
+			<td>
+				{{order.id}}
+			</td>
+			<!-- <td>
+				{{readyDish.name}}
+			</td>
+			<td>
+				{{readyDish.price}}
+			</td> -->
+			<td>
+				<a ng-click = "makeBill(order)" class = "btn btn-small btn-default"><span class="glyphicon glyphicon-thumbs-up"></span>Make bill</a>
+			</td>  
+		</tr>
+	</tbody>
+</table>

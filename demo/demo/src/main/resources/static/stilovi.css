@@ -1,0 +1,97 @@
+
+.nav>li>a:hover,
+.nav>li>a:focus {
+    text-decoration: none;
+    background-color: whitesmoke;
+    color: #333333;
+}
+.nav-pills a {
+    color: white;
+    background: #333333;
+}
+.nav-pills a:hover {
+    background-color:whitesmoke;
+    color: #333333;
+    border-radius: 0px;
+}
+.bg{
+	color: white;
+	background: url(images/restaurant.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	color:white;
+}
+.tableBG{
+	background-color: #333333;
+}
+.btn{
+    color:white;
+    background: #333333;
+}
+.select_type
+{ 
+    color: #333333;
+    width:62%;
+    padding:1.5%;
+}
+
+.navbar { border-radius:0; }
+
+table, th, td {
+   border: 1px solid black;
+   text-align:center;
+   padding: 15px;
+   height: 30px;
+   table-layout:fixed;
+}
+
+td {
+  width: 300px;
+  overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    font-size: 250%;
+}
+
+input[type="number"] { 
+    color: black;
+}
+input[type="text"] { 
+    color: black;
+}
+input { 
+    background-color: white;
+    color: black;
+}
+.tdComponents{
+    background: #333333;
+}
+
+.upload{
+    background: #333333;
+    text-align:left;
+    width: 300px;
+}
+
+.center{
+		position: fixed;
+        width: 20%; /* Set your desired with */
+        z-index: 2; /* Make sure its above other items. */
+        top: 35%;
+        left: 50%;
+        margin-top: -10%; /* Changes with height. */
+        margin-left: -10%; /* Your width divided by 2. */
+}
+
+.bottom{
+	position: fixed;
+	bottom: 4%;
+	left: 2%;
+}
+.bottom button{
+	margin: 10px;
+}

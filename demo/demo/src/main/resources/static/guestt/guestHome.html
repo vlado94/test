@@ -1,0 +1,14 @@
+<h1>Home page</h1>
+
+
+
+
+<!--  Deo koji prikazuje zahteve za prijateljstvo koje je gost primio, ako ih ima -->
+<ul ng-init="getRequests()">
+	<li ng-repeat="friend in recivedPending ">
+		<h3>You received a friend request from {{friend.friendSendRequest.firstname}} {{friend.friendSendRequest.lastname}}
+		<button class="btn btn-default navbar-btn" ng-click="acceptRequest(friend.friendSendRequest.id)">Accept</button>
+		<button class="btn btn-default navbar-btn" ng-click="rejectRequest(friend.friendSendRequest.id)">Decline</button>	 	
+		</h3>
+	</li>
+</ul>

@@ -1,0 +1,100 @@
+
+<div>
+	<h1>Manager: {{restaurant.restaurantManager.firstname}}
+		{{restaurant.restaurantManager.lastname}}</h1>
+	<h1>Restaurant: {{restaurant.name}}</h1>
+
+	<h3>Food</h3>
+	<table class="table table-bordered tableBG" border="1">
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<th>Count</th>
+				<th>Price</th>
+				<th>Mark</th>
+			</tr>
+			<tr ng-repeat="dish in restaurant.food">
+				<td>{{dish.name}}</td>
+				<td>{{dish.count}}</td>
+				<td>{{dish.price}}</td>
+				<td>{{dish.summRate/dish.numRate}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br> <br> <br>
+	<h3>Drinks</h3>
+	<table class="table table-bordered tableBG" border="1">
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<th>Count</th>
+				<th>Price</th>
+				<th>Mark</th>
+			</tr>
+			<tr ng-repeat="drink in restaurant.drinks">
+				<td>{{drink.name}}</td>
+				<td>{{drink.count}}</td>
+				<td>{{drink .price}}</td>
+				<td>{{drink.summRate/drink.numRate}}</td>
+
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Waiters</h3>
+	<table class="table table-bordered tableBG" border="1">
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<th>Mail</th>
+			</tr>
+			<tr ng-repeat="waiter in waiters">
+				<td>{{waiter.firstname}}</td>
+				<td>{{waiter.mail}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Cooks</h3>
+	<table class="table table-bordered tableBG" border="1">
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<th>Mail</th>
+			</tr>
+			<tr ng-repeat="cook in cooks">
+				<td>{{cook.firstname}}</td>
+				<td>{{cook.mail}}</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<h3>Bartenders</h3>
+	<table class="table table-bordered tableBG" border="1">
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<th>Mail</th>
+			</tr>
+			<tr ng-repeat="bartender in bartenders">
+				<td>{{bartender.firstname}}</td>
+				<td>{{bartender.mail}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<h3>Bidders</h3>
+	<table class="table table-bordered tableBG" border="1">
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<th>Mail</th>
+			</tr>
+			<tr ng-repeat="bidder in bidders">
+				<td>{{bidder.firstname}}</td>
+				<td>{{bidder.mail}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+

@@ -1,0 +1,17 @@
+<h1>Home page</h1>
+
+<h1>Manager: {{bidder.firstname}}</h1>
+
+<h3>Last orders</h3>
+<table class="table table-bordered tableBG" border="1">
+	<tbody>
+		<tr ng-repeat="order in bidder.lastOrders">
+			<td>Drinks</td>
+			<td ng-repeat="drinkOrder in order.drinks">
+				{{drinkOrder.drink.name}} count:{{drinkOrder.drink.count}}</td>
+			<td>Food</td>
+			<td ng-repeat="dishOrder in order.food">{{dishOrder.dish.name}}
+				count:{{dishOrder.dish.count}}</td>
+		</tr>
+	</tbody>
+</table>

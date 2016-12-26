@@ -1,0 +1,19 @@
+<div class = "col-sm-2">
+<form  name = "new" ng-model="$parent.restaurantManager">
+    <label>Firstname</label>
+    <input name = "firstname" type="text" class="form-control" ng-model = "$parent.restaurantManager.firstname" required>  
+
+    <label>Lastname</label>
+    <input name = "lastname" type="text" class="form-control" ng-model = "$parent.restaurantManager.lastname" required>  
+
+    <label>Mail</label>
+    <input name = "mail" type="mail" class="form-control" ng-model = "$parent.restaurantManager.mail" required>  
+
+    <label>Password</label>
+    <input name = "password	" type="password" class="form-control" ng-model = "$parent.restaurantManager.password" required>  
+
+<button class="btn btn-default" ng-click="new.$valid &&  saveManager()"><span class="glyphicon glyphicon-ok" ></span> Create</button>
+<button class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove" ></span> Cancel</button>
+</form>
+
+</div>

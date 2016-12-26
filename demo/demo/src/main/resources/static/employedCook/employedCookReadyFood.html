@@ -1,0 +1,21 @@
+<h1>ready food</h1>
+
+<table class = "table table-bordered tableBG" border="1">
+	<tbody>
+		<tr ng-repeat = "readyDish in readyFood">
+			<td>
+				{{readyDish.id}}
+			</td>
+			<td>
+				{{readyDish.name}}
+			</td>
+			<td>
+				{{readyDish.price}}
+			</td>
+			<!-- <td>
+				<a ng-click = "ready(readyDish)" class = "btn btn-small btn-default"><span class="glyphicon glyphicon-thumbs-up"></span>Ready</a>
+			</td>  -->
+		</tr>
+	</tbody>
+</table>
+

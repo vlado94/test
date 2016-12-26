@@ -1,0 +1,32 @@
+<div class = "col-sm-2">
+<form name = "change" ng-model="$parent.bartender">
+
+	<label>Id</label>
+	<input type = "text" class = "form-control" ng-model="$parent.bartender.id" style="background-color : grey" disabled ></input>
+
+	<label>Email</label>
+	<input type = "text" class = "form-control" ng-model="$parent.bartender.mail" style="background-color : grey" disabled></input>
+
+	<label>Firstname</label>
+	<input type = "text" class = "form-control" ng-model="$parent.bartender.firstname" required></input>
+
+	<label>Lastname</label>
+	<input type = "text" class = "form-control" ng-model="$parent.bartender.lastname" required></input>
+
+	<label>Clothes size</label>
+	<select class = "form-control" ng-model = "$parent.bartender.clothesSize" 
+		ng-options = "option as option for option in ['S','M','L','XL','XXL']" required>
+		<option value="" selected hidden>	
+	</select>
+
+	
+	<label>Shoes size</label>
+	<select class = "form-control" ng-model = "$parent.bartender.shoesSize" 
+		ng-options = "option as option for option in ['no38','no39','no40','no41','no42','no43','no44','no45','no46']" required>
+		<option value="" selected hidden>	
+	</select>
+	
+<button class = "btn btn-default" ng-click = "change.$valid && changeProfile()"><span class = "glyphicon glyphicon-ok"></span>Update</button>
+<button class = "btn btn-default" ng-click = "cancel()"><span class = "glyphicon glyphicon-remove"></span>Cancel</button>
+</form>
+</div>

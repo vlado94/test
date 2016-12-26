@@ -1,0 +1,24 @@
+<h1>Guest profile update</h1>
+<form  name = "change">
+
+<form>
+<table class="table table-bordered tableBG" border="1">
+<tr>
+<td>Email: </td>
+<td><input type = "text" class = "form-control" ng-model = "$parent.loggedUser.mail" style="background-color : grey" disabled></input></td>
+</tr>
+<tr>
+<td>Ime: </td>
+<td><input type = "text" class = "form-control" ng-model = "$parent.loggedUser.firstname" required></input></td>
+</tr>
+<tr>
+<td>Prezime: </td>
+<td><input type = "text" class = "form-control" ng-model = "$parent.loggedUser.lastname" required></input></td>
+</tr>
+</table>
+</form>
+
+<button class="btn btn-default" ng-click= "update()" >Update information </button>
+<button class="btn btn-default" ui-sref = "loggedIn.guest.profile" >Cancel </button>
+
+</form>
