@@ -40,6 +40,7 @@ app.controller('employedBartenderController', [ '$scope', 'employedBartenderServ
 			employedBartenderService.ready(drinkOrder.id).then(
 				function(response) {
 					$scope.drinkOrders.splice($scope.drinkOrders.indexOf(drinkOrder),1);
+					findAll();
 				},
 				function(response){
 					alert("Error while signal")
@@ -50,7 +51,7 @@ app.controller('employedBartenderController', [ '$scope', 'employedBartenderServ
 		$scope.changeProfile = function(){
 			employedBartenderService.changeProfile($scope.bartender).then(
 				function(response){
-					alert("successfully added");
+					alert("successfully changed profile");
 					$scope.state = undefined;
 					findAll();
 					$location.path('loggedIn/bartender/home');
@@ -59,5 +60,19 @@ app.controller('employedBartenderController', [ '$scope', 'employedBartenderServ
 					alert("Error in changing");
 				}
 			);
-		}		
+		}	
+		
+		$scope.changePassword = function(){
+			employedBartenderService.changePassword($scope.bartender.id,$scope.bartender).then(
+				function(response){
+					alert("successfully changed password");
+					$scope.state = undefined;
+					findAll();
+					$location.path('loggedIn/bartender/home');
+				},
+				function(response){
+					alert("Error in changing");
+				}
+			);
+		}
 }]);

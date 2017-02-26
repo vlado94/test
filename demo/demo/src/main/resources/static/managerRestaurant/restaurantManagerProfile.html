@@ -2,13 +2,13 @@
 <form name = "change" ng-model="$parent.restaurantManager">
 
 	<label>Email</label>
-	<input type = "text" class = "form-control" ng-model = "$parent.restaurant.restaurantManager.mail" style="background-color : grey" disabled></input>
+	<input type = "text" class = "form-control" ng-model = "$parent.restaurantManager.mail" style="background-color : grey" disabled></input>
 
 	<label>Firstname</label>
-	<input type = "text" class = "form-control" ng-model = "$parent.restaurant.restaurantManager.firstname" required></input>
+	<input type = "text" class = "form-control" ng-model = "$parent.restaurantManager.firstname" required></input>
 
 	<label>Lastname</label>
-	<input type = "text" class = "form-control" ng-model = "$parent.restaurant.restaurantManager.lastname" required></input>
+	<input type = "text" class = "form-control" ng-model = "$parent.restaurantManager.lastname" required></input>
 	
 <button class = "btn btn-default" ng-click = "update()"><span class = "glyphicon glyphicon-ok"></span>Update</button>
 <button class = "btn btn-default" ng-click = "cancel()"><span class = "glyphicon glyphicon-remove"></span>Cancel</button>

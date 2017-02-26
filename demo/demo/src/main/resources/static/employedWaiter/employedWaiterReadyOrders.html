@@ -1,0 +1,53 @@
+<h1>ready orders</h1>
+
+<table class = "table table-bordered tableBG" border="1">
+	<tbody>
+		<tr ng-repeat = "order in readyOrders">
+			<td>
+				{{order.id}}
+			</td>
+			<td>
+				<table>
+					<tr ng-repeat = "dish in order.food">
+						<td>
+							{{dish.name}}
+						</td>
+					</tr>
+				</table>
+			</td>
+				<td>
+				<table>
+					<tr ng-repeat = "dish in order.food">
+						<td>
+							{{dish.price}}
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<table>
+					<tr ng-repeat = "drink in order.drinks">
+						<td>
+							{{drink.name}}
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<table>
+					<tr ng-repeat = "drink in order.drinks">
+						<td>
+							{{drink.price}}
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				{{order.total}}
+			</td>
+			<td>
+				<a ng-click = "makeBill(order)" class = "btn btn-small btn-default"><span class="glyphicon glyphicon-ok"></span>Make bill</a>
+			</td>  
+		</tr>
+	</tbody>
+</table>

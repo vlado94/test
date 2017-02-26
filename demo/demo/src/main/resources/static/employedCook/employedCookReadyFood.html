@@ -2,9 +2,9 @@
 
 <table class = "table table-bordered tableBG" border="1">
 	<tbody>
-		<tr ng-repeat = "readyDish in readyFood">
+		<!-- <tr ng-repeat = "readyDish in readyFood.food">
 			<td>
-				{{readyDish.id}}
+				{{readyFood.id}}
 			</td>
 			<td>
 				{{readyDish.name}}
@@ -12,9 +12,22 @@
 			<td>
 				{{readyDish.price}}
 			</td>
-			<!-- <td>
-				<a ng-click = "ready(readyDish)" class = "btn btn-small btn-default"><span class="glyphicon glyphicon-thumbs-up"></span>Ready</a>
-			</td>  -->
+			
+		</tr> -->
+		
+		<tr ng-repeat = "order in readyFood">
+			<td>
+				{{order.id}}
+			</td>
+			<td>
+				<table>
+					<tr ng-repeat = "dish in order.food">
+						<td>
+							{{dish.name}}
+						</td>
+					</tr>
+				</table>
+			</td>
 		</tr>
 	</tbody>
 </table>

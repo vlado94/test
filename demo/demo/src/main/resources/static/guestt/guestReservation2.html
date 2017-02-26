@@ -1,0 +1,45 @@
+<div class="reservation">
+<table>
+	<tr>
+		<td><h3>Restaurant:</h3></td>
+		<td><h3>{{restaurant.name}}</h3></td>
+	</tr>
+	
+	<tr>
+		<td>Date:</td>
+		<td>{{reservation.date}}</td>
+	</tr>
+	
+	<tr>
+		<td>Time:</td>
+		<td>{{reservation.hours}}:{{reservation.minuts}}</td>
+	</tr>
+	
+	<tr>
+		<td>Duration:</td>
+		<td>{{reservation.duration}}h</td>
+	</tr>
+</table>
+<hr/><br/>
+
+
+
+<label style="color: green;" id="odabranSto"></label><br/>
+
+<table ng-init="loadTables(restaurant.id)" class = "tablesTable">
+	<tr ng-repeat="row in tables">
+		<td ng-repeat="table in row"> 
+			<button class="tableBtns" ng-if="table.status == 'Exists'" ng-click="selectTable(table)">{{table.name}}</button>
+			<button class="tableBtns" ng-if="table.status == 'Not Exists'" style="visibility:hidden;"></button>
+			<button class="tableBtns" ng-if="table.status == 'Reserved'" style = "background:red;" disabled>{{table.name}}</button>
+		</td>
+				
+	</tr>
+
+</table>
+
+<hr/><button class="btn btn-default navbar-btn" ng-click="reservation3()">Dalje</button>
+
+
+
+</div>

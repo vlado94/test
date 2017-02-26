@@ -126,6 +126,30 @@ angular.module('routerApp', ['ui.router',
 			url : '/updateManagerProfile',
 			templateUrl : 'managerRestaurant/restaurantManagerProfile.html'
 		})
+		.state('loggedIn.restaurantManager.restaurantManagerOfferDetails', {
+			url : '/offerDetails',
+			templateUrl : 'managerRestaurant/restaurantManagerOfferDetails.html'
+		})
+        .state('loggedIn.restaurantManager.newOffer', {
+			url : '/newOffer',
+			templateUrl : 'managerRestaurant/restaurantManagerNewOffer.html'
+		})
+		.state('loggedIn.restaurantManager.tablesConfig', {
+			url : '/tablesConfig',
+			templateUrl : 'managerRestaurant/restaurantManagerTableConfig.html'
+		})
+		.state('loggedIn.restaurantManager.reports', {
+			url : '/reports',
+			templateUrl : 'managerRestaurant/restaurantManagerReports.html'
+		})
+        .state('loggedIn.restaurantManager.changeShift', {
+			url : '/changeShift',
+			templateUrl : 'managerRestaurant/restaurantManagerChangeShift.html'
+		})
+		.state('loggedIn.restaurantManager.updateRestaurantProfile', {
+			url : '/updateRestaurantProfile',
+			templateUrl : 'managerRestaurant/restaurantManagerRestaurantProfile.html'
+		})
         
         
         .state('loggedIn.bartender', {
@@ -140,10 +164,6 @@ angular.module('routerApp', ['ui.router',
         .state('loggedIn.bartender.orders', {
         	url : '/orders',
         	templateUrl : 'employedBartender/employedBartenderOrders.html'
-        })
-        .state('loggedIn.bartender.readyDrinks', {
-        	url : '/readyDrinks',
-        	templateUrl : 'employedBartender/employedBartenderReadyDrinks.html'
         })
         .state('loggedIn.bartender.profile', {
         	url : '/profile',
@@ -169,9 +189,10 @@ angular.module('routerApp', ['ui.router',
         	url : '/receivedFood',
         	templateUrl : 'employedCook/employedCookReceivedFood.html'
         })
-        .state('loggedIn.cook.readyFood', {
-        	url : '/readyFood',
-        	templateUrl : 'employedCook/employedCookReadyFood.html'
+        
+         .state('loggedIn.cook.shift', {
+        	url : '/shift',
+        	templateUrl : 'employedCook/employedCookShift.html'
         })
          .state('loggedIn.cook.profile', {
         	url : '/profile',
@@ -188,13 +209,29 @@ angular.module('routerApp', ['ui.router',
         	url : '/home',
         	templateUrl : 'employedWaiter/employedWaiterHome.html'
         })
+        .state('loggedIn.waiter.orders', {
+        	url : '/orders',
+        	templateUrl : 'employedWaiter/employedWaiterOrders.html'
+        })
          .state('loggedIn.waiter.ready', {
         	url : '/ready',
         	templateUrl : 'employedWaiter/employedWaiterReadyOrder.html'
         })
          .state('loggedIn.waiter.readyOrders', {
         	url : '/readyOrders',
-        	templateUrl : 'employedWaiter/employedWaiterOrders.html'
+        	templateUrl : 'employedWaiter/employedWaiterReadyOrders.html'
+        })
+        .state('loggedIn.waiter.shifts', {
+        	url : '/shifts',
+        	templateUrl : 'employedWaiter/employedWaiterShifts.html'
+        })
+        .state('loggedIn.waiter.newOrder', {
+        	url : '/newOrder',
+        	templateUrl : 'employedWaiter/employedWaiterNewOrder.html'
+        })
+        .state('loggedIn.waiter.profile', {
+        	url : '/profile',
+        	templateUrl : 'employedWaiter/employedWaiterProfile.html'
         })
         
         .state('loggedIn.guest', {
@@ -231,6 +268,34 @@ angular.module('routerApp', ['ui.router',
 			templateUrl : 'guestt/guestFriends.html'
 			
 		})
+		.state('loggedIn.guest.restaurants', {
+			url : '/restaurants',
+			templateUrl : 'guestt/guestRestaurants.html'
+		})
+		.state('loggedIn.guest.reservation1', {
+			url : '/reservation1',
+			templateUrl : 'guestt/guestReservation1.html'
+		})
+		.state('loggedIn.guest.reservation2', {
+			url : '/reservation2',
+			templateUrl : 'guestt/guestReservation2.html'
+		})
+		.state('loggedIn.guest.reservation3', {
+			url : '/reservation3',
+			templateUrl : 'guestt/guestReservation3.html'
+		})
+		.state('loggedIn.guest.reservation4', {
+			url : '/reservation4',
+			templateUrl : 'guestt/guestReservation4.html'
+		})
+		.state('loggedIn.guest.history', {
+			url : '/history',
+			templateUrl : 'guestt/guestReservations.html'
+		})
+		.state('loggedIn.guest.restaurantOrders', {
+			url : '/restaurantOrders',
+			templateUrl : 'guestt/guestRestaurantOrders.html'
+		})
         
         
         
@@ -242,8 +307,9 @@ angular.module('routerApp', ['ui.router',
         .state('loggedIn.bidder.home', {
         	url: '/home',
         	templateUrl : 'bidder/bidderHome.html'
-        })
-        
-        
-        
+        }) 
+        .state('loggedIn.bidder.updateBidderProfile', {
+        	url: '/profile',
+        	templateUrl : 'bidder/bidderProfile.html'
+        }) 
 });

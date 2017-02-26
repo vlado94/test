@@ -1,0 +1,129 @@
+<div id = "restaurantDiv">
+<span class="label">Ordered By: {{orderByField}}</span><br><br>
+<table  class="table table-bordered tableBG" border="1">
+		<thead>
+	        <tr>
+				<th>Id</th>
+				<th><a href ng-click="orderByField='name'">Name</a></th>
+				<th><a href ng-click="orderByField='city'">City</a></th>
+				<th><a href ng-click="orderByField='street'">Street</a></th>
+				<th><a href ng-click="orderByField='number'">Number</a></th>
+				<th>Menu</th>
+				<th>Map</th>
+            </tr>
+         </thead>
+         <tbody>
+			<tr ng-repeat="restaurant in restaurants|orderBy:orderByField">
+				<td> 
+					{{restaurant.id}}
+				</td>
+				<td>
+		    		<a href ng-click="reservation1(restaurant.id)">{{restaurant.name}}</a>
+				</td>
+				<td>
+					{{restaurant.city}}
+				</td>
+				<td>
+					{{restaurant.street}}
+				</td>
+				<td>
+					{{restaurant.number}}
+				</td>
+				<td>
+					<a ng-click = "menu(restaurant)" class = "btn btn-small btn-default"><span class="glyphicon glyphicon-menu-hamburger"></span>Menu</a>
+				
+				</td>
+				<td>
+					<a ng-click = "find(restaurant)" class = "btn btn-small btn-default"><span class="glyphicon glyphicon-map-marker"></span>Find</a>
+				</td>
+			</tr>
+		</tbody>
+    </table> 
+    <div>
+    
+    
+    
+    
+    
+    
+    <!--  Deo koji omogucuje pretragu restorana -->
+<hr/>
+<div id="restaurantFind">
+<label>Find Restaurants</label>
+<form>
+<input placeholder="Enter name or type" type="text" class="form-control x3" ng-model = "$parent.findRestaurantStr" ng-change = "findRestaurants()" >
+</form>
+
+<table  class="table table-bordered tableBG" border="1">
+		<tbody>
+	        <tr>
+				<th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>&nbsp</th>
+            </tr>
+			<tr ng-repeat="rest in foundRestaurants">
+				<td> 
+					{{rest.id}}
+				</td>
+				<td>
+		    		{{rest.name}}	
+				</td>
+            	<td>
+		    		{{rest.description}}	
+				</td>
+				<td>
+					<button class="btn btn-default navbar-btn" ng-click="reservation1(rest.id)" > Make Reservation</button>
+				</td>
+				
+			</tr>
+		</tbody>
+    </table>  
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <br> <br> <br>
+	 <div ng-model = "restaurantMenu">
+	 <h3>Food</h3>
+	 	<table class="table table-bordered tableBG" border="1">
+			<tbody>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Type</th>
+				</tr>
+				<tr ng-repeat="dish in restaurantt.food | orderBy:'typeOfDish'">
+					<td>{{dish.name}}</td>
+					<td>{{dish.price}}</td>
+					<td>{{dish.typeOfDish}}</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<br> <br> <br>
+	<h3>Drinks</h3>
+	<table class="table table-bordered tableBG" border="1">
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Type</th>
+			</tr>
+			<tr ng-repeat="drink in restaurantt.drinks | orderBy:'text'">
+				<td>{{drink.name}}</td>
+				<td>{{drink .price}}</td>
+				<td>{{drink.text}}</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+	<div id="googleMap2" style="width:100%;height:400px;"></div>
+	 
+</div>

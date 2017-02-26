@@ -30,3 +30,13 @@
 <button class = "btn btn-default" ng-click = "cancel()"><span class = "glyphicon glyphicon-remove"></span>Cancel</button>
 </form>
 </div>
+
+
+<div class = "col-sm-2">
+	<form name = "change" ng-model="$parent.bartender">
+		<label>Change password</label>
+		<input type = "password" class = "form-control" ng-model="$parent.bartender.password"></input>
+	</form>
+	<button class = "btn btn-default" ng-click = "change.$valid && changePassword()"><span class = "glyphicon glyphicon-ok"></span>Change password</button>
+	
+</div>

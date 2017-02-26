@@ -2,18 +2,21 @@
 
 <table class = "table table-bordered tableBG" border="1">
 	<tbody>
-		<tr ng-repeat = "foodOrder in foodOrders">
+		<tr ng-repeat = "order in orders">
 			<td>
-				{{foodOrder.id}}
+				{{order.id}}
 			</td>
 			<td>
-				{{foodOrder.name}}
+				<table>
+					<tr ng-repeat = "dish in order.food">
+						<td>
+							{{dish.name}}
+						</td>
+					</tr>
+				</table>
 			</td>
 			<td>
-				{{foodOrder.price}}
-			</td>
-			<td>
-				<a ng-click = "received(foodOrder)" class = "btn btn-small btn-default"><span class="glyphicon glyphicon-thumbs-up"></span>Received</a>
+				<a ng-click = "received(order)" class = "btn btn-small btn-default"><span class="glyphicon glyphicon-thumbs-up"></span>Received</a>
 			</td> 
 		</tr>
 	</tbody>

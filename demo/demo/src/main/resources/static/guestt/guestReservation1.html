@@ -1,0 +1,30 @@
+<div class="reservation">
+<form name = "reservationForm">
+<table>
+	<tr>
+		<td><h3>Restaurant:</h3></td>
+		<td><h3>{{restaurant.name}}</h3></td>
+	</tr>
+	
+	<tr>
+		<td>Date:</td>
+		<td><input type="date" ng-model = "$parent.reservation.date"></td>
+	</tr>
+	
+	<tr>
+		<td>Time:</td>
+		<td><input type="number" ng-model = "$parent.reservation.hours">h</td>
+		<td><input type="number" ng-model = "$parent.reservation.minutes">m</td>
+	</tr>
+	
+	<tr>
+		<td>Duration:</td>
+		<td><input type="number" ng-model = "$parent.reservation.duration">h</td>
+	</tr>
+	
+	<tr>
+		<td colspan="2"><button class="btn btn-default navbar-btn" ng-click="reservation2()">Dalje</button></td>
+	</tr>
+</table>
+</form>
+</div>

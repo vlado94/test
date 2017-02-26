@@ -27,4 +27,8 @@ services.service('employedBartenderService',['$http', function($http){
 	this.changeProfile = function(bartender){
 		return $http.put("/bartender/profile",bartender);
 	}
+	
+	this.changePassword = function(id, bartender){
+		return $http.put("/bartender/changePassword/"+id, bartender);
+	}
 }]);

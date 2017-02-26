@@ -28,13 +28,6 @@ services.service('systemManagerService', ['$http', function($http){
 		return $http.put("/systemManager/"+systemManager.id,systemManager);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 	this.findAllRestaurant = function(){
 		return $http.get("/systemManager/restaurant");
 	}

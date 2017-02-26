@@ -1,7 +1,7 @@
 <div class = "col-sm-2">
 <form  name = "new" ng-model="$parent.employed">
 	<label> Employed type</label>
-	<select class = "form-control" ng-model="$parent.employedType"
+	<select name = "pera" class = "form-control" ng-model="$parent.employedType"
 		ng-options="option as option for option in ['Waiter', 'Cook', 'Bartender']" required>
     	<option value="" selected hidden />
     </select>
@@ -20,7 +20,6 @@
     <input name = "price" type="text" class="form-control" ng-model = "$parent.employed.lastname" required>  
 	
 	
-	
 	<label> Clothes size</label>
 	<select class = "form-control" ng-model="$parent.employed.clothesSize"
 		ng-options="option as option for option in ['S', 'M', 'L','XL','XXL']" required>
@@ -32,9 +31,42 @@
 		ng-options="option as option for option in ['no38', 'no39', 'no40','no41','no42','no43', 'no44', 'no45','no46']" required>
     	<option value="" selected hidden />
     </select>
+    
+    <label> Default shift</label>
+	<select class = "form-control" ng-change="changedShift()" ng-model="$parent.employed.defaultShift"
+		ng-options="option as option for option in ['First','Second']" required>
+    	<option value="" selected hidden />
+    </select>
+    
+    
+    <div ng-show="$parent.employedType=='Waiter'">
+	    <table ng-init="loadTables(restaurant.id)" class = "tablesTable">
+		<tr ng-repeat="row in tables">
+			<td ng-repeat="table in row"> 
+				<button class="tableBtns" ng-if="table.status == 'Exists'" ng-click="addTableInListFowWaiter(table)">{{table.name}}</button>
+				<button class="tableBtns" ng-if="table.status == 'Not Exists'" style="visibility:hidden;"></button>
+			</td>
+		</tr>
+	</table>
+    
+	</div>
+	
+	<div ng-show="$parent.employedType=='Cook'">
+		<br><br>
+	    <label> Type of cook</label>
+        <select class = "form-control" ng-model="$parent.type" id = "cookType"
+			ng-options="option as option for option in ['salad', 'cooked', 'baked']">
+    	<option value="" selected hidden />
+    </select>   
+	</div>
 
 <button class="btn btn-default" ng-click="new.$valid &&  saveEmployed()"><span class="glyphicon glyphicon-ok" ></span> Create</button>
 <button class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove" ></span> Cancel</button>
 </form>
 
+
+    
+    <div style="width : 10%;  color:#0000FF">
+    	<div id="date"></div>
+    </div>
 </div>

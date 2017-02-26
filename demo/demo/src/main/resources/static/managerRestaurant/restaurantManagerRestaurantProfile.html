@@ -1,0 +1,74 @@
+<div class = "col-sm-2">
+<form name = "change">
+	<label>Restaurant name</label>
+	<input type = "text" class = "form-control" ng-model = "$parent.restaurant.name"></input>
+	<label>Description</label>
+	<input type = "text" class = "form-control" ng-model = "$parent.restaurant.description"></input>
+	<label>City</label>
+	<input type = "text" class = "form-control" ng-model = "$parent.restaurant.city"></input>
+	<label>Street</label>
+	<input type = "text" class = "form-control" ng-model = "$parent.restaurant.street"></input>
+	<label>Number</label>
+	<input type = "text" class = "form-control" ng-model = "$parent.restaurant.number"></input>
+	
+	<button class = "btn btn-default" ng-click = "updateRestaurant()"><span class = "glyphicon glyphicon-ok"></span>Update</button>
+</form>
+
+<form>
+    <label>Food</label>
+	<table class="table table-bordered tableBG" border="1">
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<th>Count</th>
+				<th>Action</th>
+			</tr>
+			<tr ng-repeat="dish in $parent.restaurant.food">
+				<td>{{dish.name}}</td>
+				<td>{{dish.count}}</td>
+				<td><button class="btn btn-default" ng-click="changeDish(dish)"><span class="glyphicon glyphicon-change" ></span>Change</button></td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+<br><br>
+<form  name = "dishChange" ng-model = "$parent.dishForChange">
+    <label>Food name</label>
+    <input id = "artical" type="text" class="form-control" required>  
+	
+    <label>Food count</label>
+    <input id = "count" type="number" class="form-control" required>  
+ 
+	<button class="btn btn-default" ng-click="dishChange.$valid &&  tryToChangeDish()"><span class="glyphicon glyphicon-ok" ></span> Complete dish</button>
+</form>
+<br><br>
+
+<form>
+    <label>Drinks</label>
+	<table class="table table-bordered tableBG" border="1">
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<th>Count</th>
+				<th>Action</th>
+			</tr>
+			<tr ng-repeat="drink in $parent.restaurant.drinks">
+				<td>{{drink.name}}</td>
+				<td>{{drink.count}}</td>
+				<td><button class="btn btn-default" ng-click="changeDrink(drink)"><span class="glyphicon glyphicon-change" ></span>Change</button></td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+
+<br><br>
+<form  name = "drinkChange" ng-model = "$parent.drinkForChange">
+    <label>Drink name</label>
+    <input id = "articalDrink" type="text" class="form-control" required>  
+	
+    <label>Drink count</label>
+    <input id = "countDrink" type="number" class="form-control" required>  
+ 
+	<button class="btn btn-default" ng-click="dishChange.$valid &&  tryToChangeDrink()"><span class="glyphicon glyphicon-ok" ></span> Complete drink</button>
+</form>
+</div>

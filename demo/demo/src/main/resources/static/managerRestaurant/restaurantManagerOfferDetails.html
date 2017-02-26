@@ -1,0 +1,19 @@
+<h3>Bidders</h3>
+<table class="table table-bordered tableBG" border="1">
+	<tbody>
+		<tr>
+			<th>Bidder</th>
+			<th>Price</th>
+			<th>Garanty(month)</th>
+			<th>Posible deliver</th>
+			<th>Action</th>
+		</tr>
+		<tr ng-repeat="offer in restaurantOrderDetails.offers">
+			<td>{{offer.bidder.firstname}}</td>
+			<td>{{offer.price}}</td>
+			<td>{{offer.garanty}}</td>
+			<td>{{offer.posibleDelivery}}</td>
+			<td><button class="btn btn-default" ng-click="acceptRestaurantOrder(offer)"><span class="glyphicon glyphicon-add" ></span> Accept</button></td>
+		</tr>
+	</tbody>
+</table>

@@ -58,7 +58,8 @@ app.controller('systemManagerController', ['$scope','systemManagerService','$loc
             ); 	
 		};
 		
-		$scope.saveRestaurant = function () {            
+		$scope.saveRestaurant = function () { 
+			$scope.restaurant.restaurantManagers = listOfManagerForRestaurant;
 			systemManagerService.saveRestaurant($scope.restaurant).then(
 				function (response) {
                     alert("Uspesno dodat.");
@@ -78,11 +79,15 @@ app.controller('systemManagerController', ['$scope','systemManagerService','$loc
                     alert("Successfully change.");
                     $scope.state = undefined;
                     findAll();
-                    $location.path('loggedIn/systemManager/list');
+                    $location.path('login');
                 },
                 function (response) {
                     alert("Error in changing.");
                 }
 			);
 		}
+		listOfManagerForRestaurant = [];
+		$scope.addManagerInRestaurant = function(manager) {
+			listOfManagerForRestaurant.push(manager);			
+		}		
 }]);

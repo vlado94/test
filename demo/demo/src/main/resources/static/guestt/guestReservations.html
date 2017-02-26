@@ -1,0 +1,45 @@
+<h1>Reservations</h1>
+
+<table class = "table table-bordered tableBG" border="1">
+	<tbody>
+		<tr ng-repeat = "restaurant in visitedRestaurants  | orderBy:'id'">
+			
+			<td>
+				{{restaurant.id}}
+			</td>
+			<td>
+				{{restaurant.name}}
+			</td>
+			<td>
+				{{restaurant.country}}
+			</td>
+			<td>
+				{{restaurant.city}}
+			</td>
+			<td>
+				{{restaurant.street}}
+			</td>
+			<td>
+				{{restaurant.summRate}}
+			</td>
+			<td>
+				<!-- <input type = "number" ng-model="restaurantRate" class="form-control"> -->
+				<select class="form-control" ng-model="restaurantRate">
+					<option value="" selected />
+					<option value=1>1</option>
+					<option value=2>2</option>
+					<option value=3>3</option>
+					<option value=4>4</option>
+					<option value=5>5</option>
+				</select> 
+			</td>
+			<td>
+				<a ng-click = "rateRestaurant(restaurantRate,restaurant)" class = "btn btn-small btn-default"><span class="glyphicon glyphicon-star"></span>Rate</a>
+			</td>
+			<td>
+				<a ng-click = "nextToOrders(restaurant)" class = "btn btn-small btn-default"><span class="glyphicon glyphicon-arrow-right"></span>Next</a>
+			</td>
+			
+		</tr>
+	</tbody>
+</table>

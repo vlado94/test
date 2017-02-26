@@ -16,6 +16,10 @@ services.service('guestService', ['$http', function($http){
 		return $http.get("/guest/findByFirstAndLastName/"+input);
 	}
 	
+	this.findRestaurants = function(input){
+		return $http.get("/guest/findRestaurant/"+input);
+	}
+	
 	this.updateGuestProfile = function(guest){
 		return $http.put("/guest/"+guest.id,guest);
 	}
@@ -44,5 +48,73 @@ services.service('guestService', ['$http', function($http){
 		return $http.get("/friends/unfriend/"+id);
 	}
 	
+	this.restaurants = function(){
+		return $http.get("/guest/restaurants");
+	}
+	
+	this.find = function(id){
+		return $http.get("/guest/restaurant/"+id);
+	}
+	
+
+	this.orders = function(){
+		return $http.get("/guest/order");
+	}
+	
+	this.orderFood = function(id, order){
+		return $http.put("/guest/addDish/"+id, order);
+	}
+	
+	this.removeFood = function(id, order){
+		return $http.put("/guest/removeDish/"+id, order);
+	}
+	
+	this.removeDrink = function(id, order){
+		return $http.put("/guest/removeDrink/"+id, order);
+	}
+	
+	this.orderDrink = function(id, order){
+		return $http.put("/guest/addDrink/"+id, order);
+	}
+	
+	this.makeOrder = function(tableId, reservationId, order){
+		return $http.post("/guest/makeOrder/"+tableId +"/"+ reservationId, order);
+	}
+	
+
+	this.getTables = function(id){
+		return $http.get("guest/restaurant/getTables/"+id);
+	}
+	
+	this.makeReservation = function(tableId, reservation){
+		return $http.post("guest/makeReservation/"+ tableId, reservation);
+	}
+	
+	this.reservations = function(){
+		return $http.get("guest/reservations");
+	}
+	
+	this.visitedRestaurants = function(){
+		return $http.get("guest/visitedRestaurants");
+	}
+	
+	this.nextToOrders = function(id){
+		return $http.get("guest/restaurantOrders/"+id);
+	}
+	
+	this.rateRestaurant = function(restaurantRate, restaurant){
+		return $http.put("/guest/rateRestaurant/"+restaurantRate +"/"+ restaurant);
+	}
+	
+	this.rateOrder = function(orderRate, order){
+		return $http.put("/guest/rateOrder/"+orderRate +"/"+ order);	
+	}
+	
+	this.rateService = function(serviceRate, order){
+		return $http.put("/guest/rateService/"+serviceRate +"/"+ order);	
+	}
+	
+	
+
 	
 }]);

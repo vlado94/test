@@ -1,0 +1,81 @@
+<div class="reservation">
+<table>
+	<tr>
+		<td><h3>Restaurant:</h3></td>
+		<td><h3>{{restaurant.name}}</h3></td>
+	</tr>
+	
+	<tr>
+		<td>Date:</td>
+		<td>{{reservation.date}}</td>
+	</tr>
+	
+	<tr>
+		<td>Time:</td>
+		<td>{{reservation.hours}}:{{reservation.minuts}}</td>
+	</tr>
+	
+	<tr>
+		<td>Duration:</td>
+		<td>{{reservation.duration}}h</td>
+	</tr>
+</table>
+<hr/><br/>
+<h3>Call friend:</h3><br/>
+
+
+
+
+
+
+<!-- Deo koji prikazuje sve gostove prijatelje sa njihovim statusima(pending, friends, rejected) -->
+<table ng-init="listFriends()"  class="table table-bordered tableBG" border="1">
+		<tbody>
+	        <tr>
+				<th>Firstame</th>
+                <th>Lastname</th>
+                <th>&nbsp</th>
+            </tr>
+			<tr ng-repeat="friend in friends">
+				<td> 
+					{{friend.guest.firstname}}
+				</td>
+				<td>
+		    		{{friend.guest.lastname}}	
+				</td>
+				<td>
+					<button class="btn btn-default navbar-btn" ng-if="friend.status == 'Friends'" >Call friend</button>
+					<label ng-if = "friend.status != 'Friends'">{{friend.status}}</label>
+				</td>
+				
+			</tr>
+		</tbody>
+    </table> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr/>
+<button class="btn btn-default navbar-btn" ng-click="openModal()">Send</button>
+ 
+</div>
+
+<div id="myModal" class="modal">
+	<div class="modal-content">
+    	<h3>Your reservation is successfully. Do you want to order something for your reservation?</h3><hr/><br/>
+    	<button ng-click="orderForReservation()" class="btn btn-default navbar-btn">Yes</button>
+    	<button ng-click="dontOrderForReservation()" class="btn btn-default navbar-btn">No</button>
+    	<button ng-click="closeModal()" class="btn btn-default navbar-btn">Close</button>
+    	
+ 	 </div>
+</div>

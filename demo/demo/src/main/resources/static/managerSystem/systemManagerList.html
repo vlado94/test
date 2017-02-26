@@ -36,7 +36,9 @@
 	        <tr>
 				<th>Id</th>
 				<th>Name</th>
-                <th>Manager</th>
+				<th>City</th>
+				<th>Street</th>
+				<th>Number</th>
             </tr>
 			<tr ng-repeat="restaurant in restaurants">
 				<td> 
@@ -45,8 +47,14 @@
 				<td>
 		    		{{restaurant.name}}	
 				</td>
-            	<td>
-		    		{{restaurant.restaurantManager.firstname}}	
+				<td>
+		    		{{restaurant.city}}	
+				</td>
+				<td>
+		    		{{restaurant.street}}	
+				</td>
+				<td>
+		    		{{restaurant.number}}	
 				</td>
             </tr>
 		</tbody>

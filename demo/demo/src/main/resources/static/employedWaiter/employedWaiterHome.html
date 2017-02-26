@@ -1,6 +1,23 @@
 <div>
 	<h1>Waiter : {{waiter.firstname}} {{waiter.lastname}}</h1>
-	<h1>Clothe size : {{waiter.clothesSize}}</h1>
+	<!-- <h1>Restaurant : {{waiter.restaurant.name}}</h1>
+	 --><h1>Clothes size : {{waiter.clothesSize}}</h1>
 	<h1>Shoes size : {{waiter.shoesSize}}</h1>
+	
+	<div class = "reservation">
+	<table ng-init="loadTables()" class = "tablesTable">
+	<tr ng-repeat="row in tables">
+		<td ng-repeat="table in row"> 
+			<button class="tableBtns" ng-if="table.status == 'Exists'" disabled>{{table.name}} </button>
+			<button class="tableBtns" ng-if="table.status == 'Not Exists'" style="visibility:hidden;" disabled></button>
+			<button class="tableBtns" ng-if="table.status == 'Reserved'" style = "background:green;" disabled>{{table.name}}</button>
+		</td>
+				
+	</tr>
+
+	</table>
+	</div>
+	
+	
 
 </div>

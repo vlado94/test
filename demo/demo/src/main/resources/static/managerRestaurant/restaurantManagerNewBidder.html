@@ -16,4 +16,20 @@
 <button class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove" ></span> Cancel</button>
 </form>
 
+<h3>Free bidders</h3>
+<table class="table table-bordered tableBG" border="1">
+	<tbody>
+		<tr>
+			<th>Firstname</th>
+			<th>Lastname</th>
+			<th>Action</th>
+		</tr>
+		<tr ng-repeat="bidder in freeBidders">
+			<td>{{bidder.firstname}}</td>
+			<td>{{bidder.lastname}}</td>
+			<td><button class="btn btn-default" ng-click="connectBidder(bidder)"><span class="glyphicon glyphicon-add" ></span> Add</button></td>
+		</tr>
+	</tbody>
+</table>
+
 </div>

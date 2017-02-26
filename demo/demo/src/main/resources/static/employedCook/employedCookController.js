@@ -25,7 +25,7 @@ app.controller('employedCookController',['$scope','employedCookService','$locati
 			
 			employedCookService.findAllOrders().then(
 				function(response){
-					$scope.foodOrders = response.data;
+					$scope.orders = response.data;
 				}
 			);
 			
@@ -45,7 +45,8 @@ app.controller('employedCookController',['$scope','employedCookService','$locati
 		$scope.received = function(foodOrder){
 			employedCookService.received(foodOrder.id).then(
 				function(response){
-					$scope.foodOrders.splice($scope.foodOrders.indexOf(foodOrder),1);
+					$scope.orders.splice($scope.orders.indexOf(foodOrder),1);
+					findAll();
 				},
 				function(response){
 					alert("Error while signal");
@@ -53,10 +54,11 @@ app.controller('employedCookController',['$scope','employedCookService','$locati
 			);
 		}
 		
-		$scope.ready = function(receivedDish){
-			employedCookService.ready(receivedDish.id).then(
+		$scope.ready = function(order){
+			employedCookService.ready(order.id).then(
 				function(response){
-					$scope.receivedFood.splice($scope.receivedFood.indexOf(receivedDish),1);
+					$scope.receivedFood.splice($scope.receivedFood.indexOf(order),1);
+					findAll();
 				},
 				function(response){
 					alert("Error while signal");
@@ -67,7 +69,7 @@ app.controller('employedCookController',['$scope','employedCookService','$locati
 		$scope.changeProfile = function(){
 			employedCookService.changeProfile($scope.cook.id,$scope.cook).then(
 				function(response){
-					alert("successfully added");
+					alert("successfully changed profile");
 					$scope.state = undefined;
 					findAll();
 					$location.path('loggedIn/cook/home');
@@ -77,4 +79,19 @@ app.controller('employedCookController',['$scope','employedCookService','$locati
 				}
 			);
 		}
+		
+		$scope.changePassword = function(){
+			employedCookService.changePassword($scope.cook.id,$scope.cook).then(
+				function(response){
+					alert("successfully changed password");
+					$scope.state = undefined;
+					findAll();
+					$location.path('loggedIn/cook/home');
+				},
+				function(response){
+					alert("Error in changing");
+				}
+			);
+		}
+		
 }]);

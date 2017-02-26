@@ -1,17 +1,87 @@
 <h1>Home page</h1>
-
 <h1>Manager: {{bidder.firstname}}</h1>
 
 <h3>Last orders</h3>
 <table class="table table-bordered tableBG" border="1">
 	<tbody>
-		<tr ng-repeat="order in bidder.lastOrders">
-			<td>Drinks</td>
-			<td ng-repeat="drinkOrder in order.drinks">
-				{{drinkOrder.drink.name}} count:{{drinkOrder.drink.count}}</td>
-			<td>Food</td>
-			<td ng-repeat="dishOrder in order.food">{{dishOrder.dish.name}}
-				count:{{dishOrder.dish.count}}</td>
+		<tr>
+			<th>Artical</th>
+			<th>Price</th>
+			<th>Garanty</th>
+			<th>State</th>
+			<th>Start</th>
+			<th>Posible</th>
+			<th>End</th>
+			<th>Active</th>
+			<th>Action</th>
+		</tr>
+		<tr ng-repeat="restaurantOrder in restaurantOrders">
+			<td>{{restaurantOrder.drink.name}}{{restaurantOrder.dish.name}} </td>
+			<td>{{restaurantOrder.offers.price}}</td>
+			<td>{{restaurantOrder.offers.garanty}}</td>
+			<td>{{restaurantOrder.offers.accepted}}</td>
+			<td>{{restaurantOrder.startDate}}</td>
+			<td>{{restaurantOrder.offers.posibleDelivery}}</td>
+			<td>{{restaurantOrder.endDate}}</td>
+			<td>{{restaurantOrder.orderActive}}</td>
+			<td><button class="btn btn-default" ng-click="change(restaurantOrder)" ng-if="restaurantOrder.orderActive=='open'"><span class="glyphicon glyphicon-change" ></span>Change</button></td>
 		</tr>
 	</tbody>
 </table>
+	
+	
+<form  name = "new" ng-model = "$parent.offer1">
+    <label>Artical</label>
+    <input id = "artical" type="text" class="form-control" disabled>  
+
+    <label>Price</label>
+    <input id = "price" type="number" ng-model = "$parent.offer1.price" class="form-control" required>  
+
+	<label>Garanty</label>
+    <input id = "garanty" type="number" ng-model = "$parent.offer1.garanty" class="form-control" required>  
+    
+    <label>Posible delivery</label>
+    <input type="date" class="form-control" id = "posibleDelivery" ng-model = "$parent.offer1.posibleDelivery" required max="2020-12-31">  
+    
+	<button class="btn btn-default" ng-click="new.$valid &&  changeOffer()"><span class="glyphicon glyphicon-ok" ></span> Change</button>
+</form>
+
+
+<br><br><br>
+<h3>Active offers where i can comete</h3>
+<table class="table table-bordered tableBG" border="1">
+	<tbody>
+		<tr>
+			<th>Artical</th>
+			<th>Count</th>
+			<th>Start</th>
+			<th>End</th>
+			<th>Active</th>
+			<th>Action</th>
+		</tr>
+		<tr ng-repeat="restaurantOrder in restaurantOrdersFromAllRestaurants">
+			<td>{{restaurantOrder.drink.name}}{{restaurantOrder.dish.name}} </td>
+			<td>{{restaurantOrder.count}}</td>
+			<td>{{restaurantOrder.startDate}}</td>
+			<td>{{restaurantOrder.endDate}}</td>
+			<td>{{restaurantOrder.orderActive}}</td>
+			<td><button class="btn btn-default" ng-click="compete(restaurantOrder)"><span class="glyphicon glyphicon-change" ></span>Compete</button></td>
+		</tr>
+	</tbody>
+</table>
+		
+<form  name = "new2" ng-model = "$parent.offer">
+    <label>Artical</label>
+    <input id = "articalForCompete" type="text" class="form-control" disabled>  
+
+    <label>Price</label>
+    <input id = "priceForCompete" type="number" ng-model = "$parent.offer.price"class="form-control" required>  
+
+    <label>Garanty</label>
+    <input id = "garanty" type="number" ng-model = "$parent.offer.garanty" class="form-control" required>  
+    
+    <label>Posible delivery</label>
+    <input type="date" class="form-control" id = "posibleDelivery" ng-model = "$parent.offer.posibleDelivery" required max="2020-12-31">  
+    
+	<button class="btn btn-default" ng-click="new2.$valid &&  competeWithInsertedValue()"><span class="glyphicon glyphicon-ok" ></span> Start compete</button>
+</form>

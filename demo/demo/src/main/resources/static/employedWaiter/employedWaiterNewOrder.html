@@ -1,0 +1,91 @@
+
+<select class="form-control" ng-model="reservationId"
+	ng-options="reservation.id for reservation in reservations"
+	ng-change="changedValue(reservationId)">
+</select>
+
+<div ng-if="reservation != '' ">
+	<div class="col-sm-2"
+		ng-if="newOrder.drinks.length > 0 || newOrder.food.length > 0">
+		<h4>Ordered food:</h4>
+		<table class="table tableBG">
+			<tbody>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Type</th>
+				</tr>
+				<tr ng-repeat="dish in newOrder.food">
+					<td>{{dish.name}}</td>
+					<td>{{dish.price}}</td>
+					<td>{{dish.typeOfDish}}</td>
+					<td><a ng-click=removeNewDish(dish)
+						class="btn btn-small btn-default"><span
+							class=" glyphicon glyphicon-remove"></span></a></td>
+				</tr>
+				<tr ng-repeat="drink in newOrder.drinks">
+					<td>{{drink.name}}</td>
+					<td>{{drink.price}}</td>
+					<td>{{drink.text}}</td>
+					<td><a ng-click=removeNewDrink(drink)
+						class="btn btn-small btn-default"><span
+							class=" glyphicon glyphicon-remove"></span></a></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="col-sm-2">
+			<a ng-click=makeNewOrder() class="btn btn-small"><span
+				class="glyphicon glyphicon-ok"></span>Make order</a>
+		</div>
+	</div>
+
+	<div ng-model="restaurantMenu">
+		<h3>Restaurant : {{restaurant.name}}</h3>
+		<table class="table table-bordered tableBG" border="1">
+			<tbody>
+				<tr>
+					<th colspan="4"><h3>Food</h3></th>
+				</tr>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Type</th>
+					<th>Order</th>
+				</tr>
+				<tr ng-repeat="dish in restaurant.food | orderBy:'typeOfDish'">
+					<td>{{dish.name}}</td>
+					<td>{{dish.price}}</td>
+					<td>{{dish.typeOfDish}}</td>
+					<td><a ng-click="newOrderFood(dish)"
+						class="btn btn-small btn-default"><span
+							class="glyphicon glyphicon-cutlery"></span>Order</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<br> <br> <br>
+		<table class="table table-bordered tableBG" border="1">
+			<tbody>
+				<tr>
+					<th colspan="4"><h3>Drinks</h3></th>
+				</tr>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Type</th>
+					<th>Mark</th>
+				</tr>
+				<tr ng-repeat="drink in restaurant.drinks | orderBy:'text'">
+					<td>{{drink.name}}</td>
+					<td>{{drink .price}}</td>
+					<td>{{drink.text}}</td>
+					<td><a ng-click="newOrderDrink(drink)"
+						class="btn btn-small btn-default"><span
+							class="glyphicon glyphicon-glass"></span>Order</a></td>
+
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

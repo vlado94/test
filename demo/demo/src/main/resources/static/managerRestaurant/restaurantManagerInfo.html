@@ -1,9 +1,10 @@
 
 <div>
-	<h1>Manager: {{restaurant.restaurantManager.firstname}}
-		{{restaurant.restaurantManager.lastname}}</h1>
+	<h1>Manager: {{restaurantManager.firstname}}
+		{{restaurantManager.lastname}}</h1>
 	<h1>Restaurant: {{restaurant.name}}</h1>
 
+	<h1>Average rate: {{averageRate}}</h1>
 	<h3>Food</h3>
 	<table class="table table-bordered tableBG" border="1">
 		<tbody>
@@ -11,13 +12,13 @@
 				<th>Name</th>
 				<th>Count</th>
 				<th>Price</th>
-				<th>Mark</th>
+				<th>Type</th>
 			</tr>
 			<tr ng-repeat="dish in restaurant.food">
 				<td>{{dish.name}}</td>
 				<td>{{dish.count}}</td>
 				<td>{{dish.price}}</td>
-				<td>{{dish.summRate/dish.numRate}}</td>
+				<td>{{dish.typeOfDish}}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -30,14 +31,11 @@
 				<th>Name</th>
 				<th>Count</th>
 				<th>Price</th>
-				<th>Mark</th>
 			</tr>
 			<tr ng-repeat="drink in restaurant.drinks">
 				<td>{{drink.name}}</td>
 				<td>{{drink.count}}</td>
 				<td>{{drink .price}}</td>
-				<td>{{drink.summRate/drink.numRate}}</td>
-
 			</tr>
 		</tbody>
 	</table>
@@ -48,10 +46,12 @@
 			<tr>
 				<th>Name</th>
 				<th>Mail</th>
+				<th>Action</th>
 			</tr>
 			<tr ng-repeat="waiter in waiters">
 				<td>{{waiter.firstname}}</td>
 				<td>{{waiter.mail}}</td>
+				<td><button class="btn btn-default" ng-click="demissionWaiter(waiter)"><span class="glyphicon glyphicon-add" ></span>Demission</button></td>
 			</tr>
 		</tbody>
 	</table>
@@ -62,10 +62,12 @@
 			<tr>
 				<th>Name</th>
 				<th>Mail</th>
+				<th>Action</th>
 			</tr>
 			<tr ng-repeat="cook in cooks">
 				<td>{{cook.firstname}}</td>
 				<td>{{cook.mail}}</td>
+				<td><button class="btn btn-default" ng-click="demissionCook(cook)"><span class="glyphicon glyphicon-add" ></span>Demission</button></td>
 			</tr>
 		</tbody>
 	</table>
@@ -76,10 +78,12 @@
 			<tr>
 				<th>Name</th>
 				<th>Mail</th>
+				<th>Action</th>
 			</tr>
 			<tr ng-repeat="bartender in bartenders">
 				<td>{{bartender.firstname}}</td>
 				<td>{{bartender.mail}}</td>
+				<td><button class="btn btn-default" ng-click="demissionBartender(bartender)"><span class="glyphicon glyphicon-add" ></span>Demission</button></td>
 			</tr>
 		</tbody>
 	</table>
@@ -96,5 +100,29 @@
 			</tr>
 		</tbody>
 	</table>
+	
+	<h3>Offers</h3>
+	<table class="table table-bordered tableBG" border="1">
+		<tbody>
+			<tr>
+				<th>ID (dish/drink,menja se)</th>
+				<th>Count</th>
+				<th>Start date</th>
+				<th>End date</th>
+				<th>Action</th>
+			</tr>
+			<tr ng-repeat="restaurantOrder in restaurantOrders">
+				<td>{{restaurantOrder.dish.name}}{{restaurantOrder.drink.name}}</td>
+				<td>{{restaurantOrder.count}}</td>
+				<td>{{restaurantOrder.startDate}}</td>
+				<td>{{restaurantOrder.endDate}}</td>
+				<td><button class="btn btn-default" ng-click="offerDetails(restaurantOrder)"><span class="glyphicon glyphicon-add" ></span> Details</button></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<h1>Position</h1>
+	<div id="googleMap2" style="width:100%;height:400px;"></div>
+	
 </div>
 

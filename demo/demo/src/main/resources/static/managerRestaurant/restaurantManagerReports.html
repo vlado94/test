@@ -1,0 +1,62 @@
+<div class="col-sm-2">
+	<form name = "waiterReport">
+		<label>Report for bidder</label> <br>
+		<input class="form-control" type = "text" ng-model="$parent.waiterName" required>
+		<button class="btn btn-default" ng-click="waiterReport && getWaiterWithInputName()"><span class="glyphicon glyphicon-ok" ></span>Get report</button>
+		<br><br>
+		<label class="form-control"> Rate: {{$parent.waiterRate}}</label>
+	</form>
+		<br>
+		<br>
+	<form name = "dishReport">
+		<label>Report for dish</label><br>
+		<input class="form-control" type = "text" ng-model="$parent.dishName" required>
+		<button class="btn btn-default" ng-click="dishReport.$valid && geDishWithInputName()"><span class="glyphicon glyphicon-ok" ></span>Get report</button>
+		<br><br>
+		<label class="form-control"> Rate: {{$parent.dishRate}}</label>
+	</form>
+	
+	<h3>Revenues</h3>
+	<form name = "revenuesForm">
+	    <label>From date</label>
+	    <input type="date" class="form-control" ng-model = "$parent.fromDateRevenues" required>  
+	
+	    <label>To date</label>
+	    <input type="date" class="form-control" ng-model = "$parent.toDateRevenues" required>  
+		<button class="btn btn-default" ng-click="revenuesForm.$valid && calculateRevenues()"><span class="glyphicon glyphicon-ok" ></span>Get revenues</button>
+		<br><br>
+		<label class="form-control"> Revenues: {{$parent.restaurantRevenues}}</label>
+	</form>
+	<br><br>
+	<button class="btn btn-default" ng-click="showRevenuesForWaiters()"><span class="glyphicon glyphicon-ok" ></span>Show revenues from waiters separates</button>
+	
+	<h3>Revenues from waiters separates</h3>
+	<form>
+	<table class="table table-bordered tableBG" border="1">
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<th>Revenues</th>
+			</tr>
+			<tr ng-repeat="waiter in revenuesWaiter">
+				<td>{{waiter.name}}</td>
+				<td>{{waiter.revenues}}</td>
+				</tr>
+		</tbody>
+	</table>
+	
+	
+	</form>
+	
+	<form name = "week" >
+		<canvas id="myChartWeek" style = "background: white"></canvas>
+		<input type="date" class="form-control" ng-model = "$parent.chartForWeek" required>  
+		<button class="btn btn-default" ng-click="week.$valid && showNumOfVisitorsForWeek()"><span class="glyphicon glyphicon-ok" ></span>Show num of visitors</button>
+	</form>
+	<form  name = "day">
+		<canvas style = "background: white" id="myChartDay"></canvas>
+		<input type="date" class="form-control" ng-model = "$parent.chartForDay" required>  
+		<button class="btn btn-default" ng-click="day.$valid &&showNumOfVisitorsForDay()"><span class="glyphicon glyphicon-ok" ></span>Show num of visitors</button>
+	</form>
+		
+</div>

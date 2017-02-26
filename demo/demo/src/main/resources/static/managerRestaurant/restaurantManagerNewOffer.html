@@ -1,0 +1,27 @@
+<div class = "col-sm-2">
+<form  name = "new" ng-model="$parent.newRestaurantOrder">
+    <label>Dish</label>
+	<select name="repeatSelect" id="repeatSelect"  class = "form-control" ng-model="$parent.newRestaurantOrder.dish.id">
+      <option value="" selected />
+      <option ng-repeat="option in restaurant.food" value="{{option.id}}">{{option.name}}</option>
+    </select>
+
+    <label>Drink</label>
+	<select name="repeatSelect" id="repeatSelect"  class = "form-control" ng-model="$parent.newRestaurantOrder.drink.id">
+      <option value="" selected />
+      <option ng-repeat="option in restaurant.drinks" value="{{option.id}}">{{option.name}}</option>
+    </select>
+	<label>Count</label>
+    <input type="number" class="form-control" ng-model = "$parent.newRestaurantOrder.count" required>  
+
+    <label>Start date</label>
+    <input type="date" class="form-control" ng-model = "$parent.newRestaurantOrder.startDate" required max="2020-12-31">  
+
+    <label>End date</label>
+    <input type="date" class="form-control" ng-model = "$parent.newRestaurantOrder.endDate" required max="2020-12-31">  
+
+<button class="btn btn-default" ng-click="new.$valid &&  createNewOffer()"><span class="glyphicon glyphicon-ok" ></span> Create</button>
+<button class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove" ></span> Cancel</button>
+</form>
+
+</div>
