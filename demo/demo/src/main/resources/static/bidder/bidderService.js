@@ -13,7 +13,7 @@ services.service('bidderService', ['$http', function($http){
 	}
 	
 	this.changeOffer = function(restaurantOrderForChange,offer){
-		return $http.post("/bidder/changeOffer/"+restaurantOrderForChange.id,offer);
+		return $http.post("/bidder/changeOffer/"+restaurantOrderForChange.id+"/"+restaurantOrderForChange.lock,offer);
 	}
 	
 	this.getActiveOffers = function(){

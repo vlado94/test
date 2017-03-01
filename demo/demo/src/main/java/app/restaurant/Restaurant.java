@@ -5,8 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -87,8 +85,10 @@ public class Restaurant {
 	@JoinTable(name = "RESTAURANT_ORDER", joinColumns = @JoinColumn(name = "RESTAURANT_ID"), inverseJoinColumns = @JoinColumn(name = "ORDER_ID"))
 	private List<Orderr> order;
 	
-	//lista porudzbina restorana
+	
+	//lista porudzbina restorana za ponudjace
 	@OneToMany
+	//@OneToMany
 	@JoinTable(name = "RESTAURANT_RESTAURANT_ORDER", joinColumns = @JoinColumn(name = "RESTAURANT_ID"), inverseJoinColumns = @JoinColumn(name = "RESTAURANT_ORDER_ID"))
 	private List<RestaurantOrderr> restaurantOrders;
 	

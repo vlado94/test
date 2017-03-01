@@ -2,9 +2,6 @@ package app.reservation;
 
 import java.util.List;
 
-import app.guest.Guest;
-import app.restaurant.Restaurant;
-
 
 public interface ReservationService {
 	List<Reservation> findAll();
@@ -14,4 +11,5 @@ public interface ReservationService {
 	Reservation findOne(Long id);
 
 	void delete(Long id);
+	
 }

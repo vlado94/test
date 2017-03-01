@@ -117,7 +117,7 @@ app.controller('bidderController', ['$scope','bidderService', '$location',
 	                	location.reload(true);
 					}
 					else
-						alert('Erorr.Maybe is offer closed.');
+						alert('Error.Maybe is offer closed.');
 				}
 		    );
 		}

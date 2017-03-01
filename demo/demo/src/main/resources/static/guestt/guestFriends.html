@@ -17,18 +17,20 @@
 
 
 
-
+<span class="label">Ordered By: {{orderByField}}</span><br><br>
 <!-- Deo koji prikazuje sve gostove prijatelje sa njihovim statusima(pending, friends, rejected) -->
 <table ng-init="listFriends()"  class="table table-bordered tableBG" border="1">
-		<tbody>
+		<thead>
 	        <tr>
-				<th>Firstame</th>
-                <th>Lastname</th>
-                <th>Mail</th>
+				<th><a href ng-click="orderByField='guest.firstname'">Firstame</a></th>
+                <th><a href ng-click="orderByField='guest.lastname'">Lastname</a></th>
+                <th><a href ng-click="orderByField='guest.mail'">Mail</a></th>
                 <th>Status</th>
                 <th>&nbsp</th>
             </tr>
-			<tr ng-repeat="friend in friends">
+         </thead>
+         <tbody>
+			<tr ng-repeat="friend in friends|orderBy:orderByField">
 				<td> 
 					{{friend.guest.firstname}}
 				</td>

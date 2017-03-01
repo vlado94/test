@@ -1,5 +1,6 @@
 package app.restaurant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,7 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import app.reservation.Reservation;
 import lombok.Data;
@@ -22,6 +27,10 @@ public class Table {
 	public static final String NOT_EXISTS = "Not Exists";
 	public static final String EXISTS = "Exists";
 	public static final String RESERVED = "Reserved";
+	
+	@Version
+	@Column
+	private Integer version;
 	
 
 	@Id
@@ -48,7 +57,9 @@ public class Table {
 	@Column
 	private String segmentName;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	
+	
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "TABLE_RESERVATION", joinColumns = @JoinColumn(name = "TABLE_ID"), inverseJoinColumns = @JoinColumn(name = "RESERVATION_ID"))
 	private List<Reservation> reservations;
 	
@@ -62,6 +73,7 @@ public class Table {
 	
 	public Table() {
 		// TODO Auto-generated constructor stub
+		this.reservations = new ArrayList<Reservation>();
 	}
 	
 	

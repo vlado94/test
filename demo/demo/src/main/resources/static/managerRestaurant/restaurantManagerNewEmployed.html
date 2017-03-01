@@ -43,7 +43,7 @@
 	    <table ng-init="loadTables(restaurant.id)" class = "tablesTable">
 		<tr ng-repeat="row in tables">
 			<td ng-repeat="table in row"> 
-				<button class="tableBtns" ng-if="table.status == 'Exists'" ng-click="addTableInListFowWaiter(table)">{{table.name}}</button>
+				<button class="tableBtns"  id = {{table.id}} ng-if="table.status == 'Exists'" ng-click="addTableInListFowWaiter(table,this)">{{table.name}}</button>
 				<button class="tableBtns" ng-if="table.status == 'Not Exists'" style="visibility:hidden;"></button>
 			</td>
 		</tr>
@@ -54,7 +54,7 @@
 	<div ng-show="$parent.employedType=='Cook'">
 		<br><br>
 	    <label> Type of cook</label>
-        <select class = "form-control" ng-model="$parent.type" id = "cookType"
+        <select class = "form-control " ng-model="$parent.type" id = "cookType"
 			ng-options="option as option for option in ['salad', 'cooked', 'baked']">
     	<option value="" selected hidden />
     </select>   
@@ -66,7 +66,7 @@
 
 
     
-    <div style="width : 10%;  color:#0000FF">
+    <div style="width : 10%;  color:#0000FF" class = "reservation">
     	<div id="date"></div>
     </div>
 </div>

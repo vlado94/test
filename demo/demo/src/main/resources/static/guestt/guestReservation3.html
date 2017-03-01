@@ -12,7 +12,7 @@
 	
 	<tr>
 		<td>Time:</td>
-		<td>{{reservation.hours}}:{{reservation.minuts}}</td>
+		<td>{{reservation.hours}}:{{reservation.minutes}}</td>
 	</tr>
 	
 	<tr>
@@ -22,13 +22,7 @@
 </table>
 <hr/><br/>
 <h3>Call friend:</h3><br/>
-
-
-
-
-
-
-<!-- Deo koji prikazuje sve gostove prijatelje sa njihovim statusima(pending, friends, rejected) -->
+<!-- Deo koji prikazuje sve gostove prijatelje  -->
 <table ng-init="listFriends()"  class="table table-bordered tableBG" border="1">
 		<tbody>
 	        <tr>
@@ -44,24 +38,13 @@
 		    		{{friend.guest.lastname}}	
 				</td>
 				<td>
-					<button class="btn btn-default navbar-btn" ng-if="friend.status == 'Friends'" >Call friend</button>
+					<button class="btn btn-default navbar-btn"  id = {{friend.guest.id}} ng-click="addFriendToReservation(friend.guest.id)" ng-if="friend.status == 'Friends'" >Call friend</button>
 					<label ng-if = "friend.status != 'Friends'">{{friend.status}}</label>
 				</td>
 				
 			</tr>
 		</tbody>
-    </table> 
-
-
-
-
-
-
-
-
-
-
-
+    </table>
 
 
 
@@ -72,7 +55,7 @@
 
 <div id="myModal" class="modal">
 	<div class="modal-content">
-    	<h3>Your reservation is successfully. Do you want to order something for your reservation?</h3><hr/><br/>
+    	<h3>We are sending mails to your friends, please wait. </h3><br/><br/><h3> Do you want to order something for your reservation?</h3><hr/><br/>
     	<button ng-click="orderForReservation()" class="btn btn-default navbar-btn">Yes</button>
     	<button ng-click="dontOrderForReservation()" class="btn btn-default navbar-btn">No</button>
     	<button ng-click="closeModal()" class="btn btn-default navbar-btn">Close</button>

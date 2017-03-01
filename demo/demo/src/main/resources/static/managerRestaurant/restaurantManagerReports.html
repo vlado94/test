@@ -1,6 +1,6 @@
 <div class="col-sm-2">
 	<form name = "waiterReport">
-		<label>Report for bidder</label> <br>
+		<label>Report for waiter</label> <br>
 		<input class="form-control" type = "text" ng-model="$parent.waiterName" required>
 		<button class="btn btn-default" ng-click="waiterReport && getWaiterWithInputName()"><span class="glyphicon glyphicon-ok" ></span>Get report</button>
 		<br><br>
@@ -48,12 +48,15 @@
 	
 	</form>
 	
+	
 	<form name = "week" >
+		<label> Report for week</label>
 		<canvas id="myChartWeek" style = "background: white"></canvas>
 		<input type="date" class="form-control" ng-model = "$parent.chartForWeek" required>  
 		<button class="btn btn-default" ng-click="week.$valid && showNumOfVisitorsForWeek()"><span class="glyphicon glyphicon-ok" ></span>Show num of visitors</button>
 	</form>
 	<form  name = "day">
+		<label> Report for day</label>
 		<canvas style = "background: white" id="myChartDay"></canvas>
 		<input type="date" class="form-control" ng-model = "$parent.chartForDay" required>  
 		<button class="btn btn-default" ng-click="day.$valid &&showNumOfVisitorsForDay()"><span class="glyphicon glyphicon-ok" ></span>Show num of visitors</button>

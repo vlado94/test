@@ -189,7 +189,17 @@ app.controller('restaurantManagerController', ['$scope','$window','restaurantMan
 		
 		$scope.saveEmployed = function() {
 			//$scope.drink.restaurant = $scope.restaurant;
+			
 			if($scope.employedType == 'Waiter') {
+				for(var i = 0;i<tablesForNewWaiter.length;i++) 
+					for(var j = 0;j<tablesForNewWaiter.length;j++) 
+						if(tablesForNewWaiter[i].id == tablesForNewWaiter[j].id && i != j) {
+		                    alert("Choosen two same tables.");
+							$window.location.reload();
+		                    return;
+						}
+							
+				
 				$scope.employed.tablesForHandling = tablesForNewWaiter;
 				restaurantManagerService.saveWaiter($scope.employed).then(
 					function (response) {
@@ -328,9 +338,9 @@ app.controller('restaurantManagerController', ['$scope','$window','restaurantMan
 			dish = $scope.newRestaurantOrder.dish
 			$scope.newRestaurantOrder.startDate = new Date($scope.newRestaurantOrder.startDate).toISOString();
 			$scope.newRestaurantOrder.endDate = new Date($scope.newRestaurantOrder.endDate).toISOString();
-			if (dish.id === "")
+			if (dish == undefined || dish.id === "")
 				$scope.newRestaurantOrder.dish = null;
-			if (drink.id === "")
+			if (drink == undefined || drink.id === "")
 				$scope.newRestaurantOrder.drink = null;
 				
 			if(((dish === undefined || dish.id === "") && drink.id !== "") || (dish.id !== "" && (drink == null || drink.id === ""))) {
@@ -483,6 +493,7 @@ app.controller('restaurantManagerController', ['$scope','$window','restaurantMan
 		
 		$scope.showNumOfVisitorsForDay = function() {
 			dataVisitors = getDataForDay();
+			
 			var ctx = document.getElementById('myChartDay').getContext('2d');
 			var myChart = new Chart(ctx, {
 			  type: 'bar',
@@ -499,51 +510,56 @@ app.controller('restaurantManagerController', ['$scope','$window','restaurantMan
 		
 		function getDataForDay() {
 			//uzimanje svih racuna iz restorana
-			bills = [];
+			reservations = [];
 			visitors = [0,0,0,0,0,0,0];
-			for(var i =0;i<$scope.restaurant.waiters.length;i++) {
-				for(var j =0;j<$scope.restaurant.waiters[i].bills.length;j++) {
-					bills.push($scope.restaurant.waiters[i].bills[j]);
+			for(var i =0;i<$scope.restaurant.segments.length;i++) {
+				for(var j =0;j<$scope.restaurant.segments[i].tables.length;j++) {
+					for(var k =0;k<$scope.restaurant.segments[i].tables[j].reservations.length;k++) {
+						reservations.push($scope.restaurant.segments[i].tables[j].reservations[k]);
+					}
 				}
 			}
+			
 			var requestedDate = new Date($scope.chartForDay);
 			reservationsThatDay = [];
-			for(var j =0;j<bills.length;j++) {
-				var day = new Date(bills[j].date);
+			for(var j =0;j<reservations.length;j++) {
+				var day = new Date(reservations[j].date);
 				if(requestedDate.getFullYear() == day.getFullYear() && requestedDate.getMonth() == day.getMonth() && requestedDate.getDate() == day.getDate())
-					reservationsThatDay.push(bills[j]);
+					reservationsThatDay.push(reservations[j]);
 			}
 			
 			for(var j =0;j<reservationsThatDay.length;j++) {
-				var hours = reservationsThatDay[j].reservation.hours;
+				var hours = reservationsThatDay[j].hours;
 				var termin = findClosestTermin(hours);
-				visitors[termin] += reservationsThatDay[j].reservation.guests.length;	
+				visitors[termin] += reservationsThatDay[j].guests.length;	
 			}
 			return visitors;		
 		}
 		
 		function getDataForWeek() {
 			//uzimanje svih racuna iz restorana
-			bills = [];
+			reservations = [];
 			visitors = [0,0,0,0,0,0,0];
-			for(var i =0;i<$scope.restaurant.waiters.length;i++) {
-				for(var j =0;j<$scope.restaurant.waiters[i].bills.length;j++) {
-					bills.push($scope.restaurant.waiters[i].bills[j]);
+			for(var i =0;i<$scope.restaurant.segments.length;i++) {
+				for(var j =0;j<$scope.restaurant.segments[i].tables.length;j++) {
+					for(var k =0;k<$scope.restaurant.segments[i].tables[j].reservations.length;k++) {
+						reservations.push($scope.restaurant.segments[i].tables[j].reservations[k]);
+					}
 				}
 			}
 			var requestedDate = new Date($scope.chartForWeek);
 			var requestedWeekForDate = getWeekNumber(requestedDate);
 			reservationsThatWeek = [];
-			for(var j =0;j<bills.length;j++) {
-				var day = new Date(bills[j].date);
+			for(var j =0;j<reservations.length;j++) {
+				var day = new Date(reservations[j].date);
 				var weekForDate = getWeekNumber(day);
 				if(weekForDate[0] == requestedWeekForDate[0] && weekForDate[1] == requestedWeekForDate[1])
-					reservationsThatWeek.push(bills[j]);
+					reservationsThatWeek.push(reservations[j]);
 			}
 			
 			for(var j =0;j<reservationsThatWeek.length;j++) {
 				var day = new Date(reservationsThatWeek[j].date).getDay();
-				visitors[day-1] += reservationsThatWeek[j].reservation.guests.length;	
+				visitors[day-1] += reservationsThatWeek[j].guests.length;	
 			}
 			return visitors;		
 		}
@@ -647,8 +663,10 @@ app.controller('restaurantManagerController', ['$scope','$window','restaurantMan
 					});
 		}
 		
-		$scope.addTableInListFowWaiter = function(id){
-			tablesForNewWaiter.push(id);
+		$scope.addTableInListFowWaiter = function(table){
+			button = document.getElementById(table.id);
+			button.style.background = 'green';
+			tablesForNewWaiter.push(table);
 		}
 
 		$scope.changedShift = function() {
@@ -662,7 +680,7 @@ app.controller('restaurantManagerController', ['$scope','$window','restaurantMan
 			else
 				temp = 0;
 			for(var i = 0;i<300;i++) {
-				day = new Date(Date.now() +temp * 86400000 + 86400000 *  i*step);
+				day = new Date(Date.now() + temp * 86400000 + 86400000 *  i*step);
 				datesArr.push(day);
 			}
 			$('#date').multiDatesPicker('destroy');

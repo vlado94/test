@@ -169,6 +169,10 @@ angular.module('routerApp', ['ui.router',
         	url : '/profile',
         	templateUrl : 'employedBartender/employedBartenderProfile.html'
         })
+        .state('loggedIn.bartender.shift', {
+        	url : '/shift',
+        	templateUrl : 'employedBartender/employedBartenderShift.html'
+        })
         
         
         
@@ -232,6 +236,14 @@ angular.module('routerApp', ['ui.router',
         .state('loggedIn.waiter.profile', {
         	url : '/profile',
         	templateUrl : 'employedWaiter/employedWaiterProfile.html'
+        })
+        .state('loggedIn.waiter.changeOrder', {
+        	url : '/changeOrder',
+        	templateUrl : 'employedWaiter/employedWaiterChangeOrder.html'
+        })
+        .state('loggedIn.waiter.changeOrdersList', {
+        	url : '/changeOrdersList',
+        	templateUrl : 'employedWaiter/changeOrdersList.html'
         })
         
         .state('loggedIn.guest', {

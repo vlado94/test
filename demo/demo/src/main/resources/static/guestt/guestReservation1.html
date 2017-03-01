@@ -8,18 +8,18 @@
 	
 	<tr>
 		<td>Date:</td>
-		<td><input type="date" ng-model = "$parent.reservation.date"></td>
+		<td><input ng-init="datepickerInit()" id="datepicker" type="date" ng-model = "$parent.reservation.date"></td>
 	</tr>
 	
 	<tr>
 		<td>Time:</td>
-		<td><input type="number" ng-model = "$parent.reservation.hours">h</td>
-		<td><input type="number" ng-model = "$parent.reservation.minutes">m</td>
+		<td><input id="hIn" class="minHourInput" type="number" placeholder="h" ng-change="inChange()" ng-model = "$parent.reservation.hours">
+		<input id="mIn" class="minHourInput" type="number" placeholder="m" ng-change="inChange()"  ng-model = "$parent.reservation.minutes"></td>
 	</tr>
 	
 	<tr>
 		<td>Duration:</td>
-		<td><input type="number" ng-model = "$parent.reservation.duration">h</td>
+		<td><input id="dIn" class="minHourInput" ng-change="inChange()" type="number" placeholder="h" ng-model = "$parent.reservation.duration"></td>
 	</tr>
 	
 	<tr>

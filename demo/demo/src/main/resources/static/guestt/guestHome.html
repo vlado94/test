@@ -12,3 +12,44 @@
 		</h3>
 	</li>
 </ul>
+
+
+
+<!-- Invajtovi za rezervaije -->
+<div ng-init = "loadInvites()" >
+
+<ul>
+<li ng-repeat = "invite in invites" track by $index><h3>You have been invited to attend meal, date: {{invite.date}} at {{invite.hours}}:{{invite.minutes}} 
+		<button class="btn btn-default navbar-btn" ng-click="acceptInvite(invite)">Accept</button>
+		<button class="btn btn-default navbar-btn" ng-click="rejectInvite(invite.id)">Decline</button></h3>
+</li>
+</ul>
+
+
+</div>
+
+
+<div id="myModal" class="modal">
+	<div class="modal-content">
+    	<h3>Your have accepted invite for reservation. Do you want to order something ?</h3><hr/><br/>
+    	<button ng-click="acceptInviteAndOrder()" class="btn btn-default navbar-btn">Yes</button>
+    	<button ng-click="acceptInviteAndNoOrder()" class="btn btn-default navbar-btn">No</button>
+    	<button ng-click="closeModal()" class="btn btn-default navbar-btn">Close</button>
+    	
+ 	 </div>
+</div>
+
+
+
+
+
+<!--  Deo koji prikazuje sve trenutne rezervacije -->
+
+<ul ng-init = "currentReservations()">
+<li ng-repeat = "reservation in currentReservations"> <h3>Remember, you have ongoing reservation: Date:{{reservation.date}}, Time: {{reservation.hours}}:{{reservation.minutes}}
+								<button class="btn btn-default navbar-btn" ng-click="cancelReservation(reservation)">Cancel</button>  </h3></li>
+</ul>
+
+
+
+

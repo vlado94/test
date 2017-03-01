@@ -1,12 +1,22 @@
-<h1>Reservations</h1>
+<h1>History</h1>
 
 <table class = "table table-bordered tableBG" border="1">
 	<tbody>
+		<tr>
+			<th>Name</th>
+			<th>Country</th>
+			<th>City</th>
+			<th>Street</th>
+			<th>Avg rate</th>
+			<th>Marks</th>
+			<th>Rate</th>
+			<th>Orders</th>
+		</tr>
 		<tr ng-repeat = "restaurant in visitedRestaurants  | orderBy:'id'">
 			
-			<td>
+			<!-- <td>
 				{{restaurant.id}}
-			</td>
+			</td> -->
 			<td>
 				{{restaurant.name}}
 			</td>

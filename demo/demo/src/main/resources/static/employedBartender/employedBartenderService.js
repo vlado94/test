@@ -8,6 +8,10 @@ services.service('employedBartenderService',['$http', function($http){
 		return $http.get("/bartender/checkRights");
 	}
 	
+	this.employedBartenders = function(){
+		return $http.get("/bartender/employedBartenders");
+	}
+	
 	this.findBartender = function(){
 		return $http.get("/bartender");
 	}
@@ -31,4 +35,9 @@ services.service('employedBartenderService',['$http', function($http){
 	this.changePassword = function(id, bartender){
 		return $http.put("/bartender/changePassword/"+id, bartender);
 	}
+	
+	this.changedShiftDate = function(id){
+		return $http.get("/bartender/changedShiftDate/"+id);
+	}
+	
 }]);

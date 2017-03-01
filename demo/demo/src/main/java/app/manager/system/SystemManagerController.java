@@ -58,8 +58,8 @@ public class SystemManagerController {
 		this.systemManagerService = systemManagerService;
 	}
 
-	@SuppressWarnings("unused")
 	@GetMapping("/checkRights")
+	@ResponseStatus(HttpStatus.OK)
 	public boolean checkRights() {
 		try {
 			SystemManager systemManager = ((SystemManager) httpSession.getAttribute("user"));
@@ -71,31 +71,41 @@ public class SystemManagerController {
 
 	// izlistavanje svih menadzera restorana
 	@GetMapping("/restaurantManager")
+	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<RestaurantManager>> findAllRestaurantManagers() {
 		return new ResponseEntity<>(restaurantManagerService.findAll(), HttpStatus.OK);
 	}
 
 	@GetMapping
+	@ResponseStatus(HttpStatus.OK)
 	public SystemManager findSystemManager() {
 		return ((SystemManager) httpSession.getAttribute("user"));
 	}
 
 	// izlistavanje svih menadzera restorana koji nemaju radno mesto
 	@GetMapping(path = "/freeRestaurantManager")
+	@ResponseStatus(HttpStatus.OK)
 	public List<RestaurantManager> findAllFreeRestaurantManagers() {
 		// ovo ce se kasnije promeniti da ide odmah na bazu, sa posebnim upitom
 		List<RestaurantManager> managers = restaurantManagerService.findAll();
-		List<Restaurant> restaurants = restaurantService.findAll();
-
 		List<RestaurantManager> result = new ArrayList<RestaurantManager>();
 		for (int i = 0; i < managers.size(); i++) {
-			for (int j = 0; j < restaurants.size(); j++)
-				if (managers.get(i).getId() == restaurants.get(j).getId())
-					break;
-			result.add(managers.get(i));
+			if(!checkIfWorkInSomeRestaurant(managers.get(i)))
+				result.add(managers.get(i));
 		}
 
 		return result;
+	}
+	
+	private boolean checkIfWorkInSomeRestaurant(RestaurantManager restaurantManager) {
+		List<Restaurant> restaurants = restaurantService.findAll();
+		for (int j = 0; j < restaurants.size(); j++) {
+			for(int k =0;k < restaurants.get(j).getRestaurantManagers().size();k++)
+				if (restaurantManager.getId() == restaurants.get(j).getRestaurantManagers().get(k).getId())
+					return true;
+		}
+		
+		return false;
 	}
 
 	// dodavanje novog menadzera restorana

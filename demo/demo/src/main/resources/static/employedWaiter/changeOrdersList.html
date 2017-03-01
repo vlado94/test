@@ -1,0 +1,38 @@
+<table class = "table table-bordered tableBG" border="1">
+		
+	<tbody>
+		<tr>
+			<th>Order id</th>
+			<th>Food</th>
+            <th>Drinks</th>
+            <th></th>
+        </tr>
+		<tr ng-repeat = "order in changeOrdersList">
+			<td>
+				{{order.id}}
+			</td>
+			<td>
+				<table>
+					<tr ng-repeat = "dish in order.food">
+						<td>
+							{{dish.name}}
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<table>
+					<tr ng-repeat = "drink in order.drinks">
+						<td>
+							{{drink.name}}
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<a ng-click = "changeOrder(order)" class = "btn btn-small btn-default"><span class="glyphicon glyphicon-ok"></span>Change order</a>
+			</td>  
+			 
+		</tr>
+	</tbody>
+</table>

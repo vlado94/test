@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import app.guest.Guest;
 import app.order.Orderr;
 import app.restaurant.Restaurant;
+import app.restaurant.Table;
 import lombok.Data;
 
 @Data
@@ -29,6 +31,9 @@ public class Reservation {
 	
 	public Reservation(){
 		this.guests = new ArrayList<Guest>();
+		this.invitedGuests = new ArrayList<Long>();
+		this.orders = new ArrayList<Orderr>();
+		this.tables = new ArrayList<Long>();
 	}
 	
 	@Id
@@ -53,6 +58,12 @@ public class Reservation {
 	@JoinTable(name = "RESERVATION_GUEST", joinColumns = @JoinColumn(name = "RESERVATION_ID"), inverseJoinColumns = @JoinColumn(name = "GUEST_ID"))
 	private List<Guest> guests;
 	
+	@ElementCollection
+	private List<Long> invitedGuests;
+	
+	@ElementCollection
+	private List<Long> tables;
+	
 	@JsonIgnore
 	@OneToMany
 	@JoinTable(name = "RESERVATION_ORDER", joinColumns = @JoinColumn(name = "RESERVATION_ID"), inverseJoinColumns = @JoinColumn(name = "ORDER_ID"))
@@ -61,7 +72,6 @@ public class Reservation {
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Restaurant restaurant;
-	
 	
 	
 

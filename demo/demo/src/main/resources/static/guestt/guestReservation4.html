@@ -1,6 +1,6 @@
 
 <a ng-click = makeOrder(order) ng-if = "order.drinks.length == 0 && order.food.length == 0" class = "btn btn-small"><span class = "glyphicon glyphicon-ok"></span>Next</a>
-    	
+<select><option ng-repeat ="invite in invites">{{invite.}}</option></select>
 
 <div class = "col-sm-2" ng-if = "order.drinks.length > 0 || order.food.length > 0">
     <h4>Ordered food:</h4>

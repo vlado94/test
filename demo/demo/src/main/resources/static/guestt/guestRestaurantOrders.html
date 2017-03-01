@@ -1,6 +1,17 @@
 
+<h3>Restaurant : {{restaurantOrder.name}}</h3>
+<h3>Avg rate of me and friends : {{avg}}</h3>
+
 <table class="table table-bordered tableBG" border="1">
 	<tbody>
+		<tr>
+			<th>Id</th>
+			<th>Orders food</th>
+			<th>Marks food</th>
+			<th>Rate food</th>
+			<th>Marks service</th>
+			<th>Rate service</th>
+		</tr>
 		<tr ng-repeat="order in restaurantOrders">
 			<td>{{order.id}}</td>
 			<td>

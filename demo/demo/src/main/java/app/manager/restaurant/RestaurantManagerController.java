@@ -44,7 +44,6 @@ import app.manager.changedShiftWaiter.ChangedShiftWaiterService;
 import app.offer.Offer;
 import app.offer.OfferService;
 import app.order.Orderr;
-import app.restaurant.Description;
 import app.restaurant.Restaurant;
 import app.restaurant.RestaurantService;
 import app.restaurant.Segment;
@@ -151,7 +150,7 @@ public class RestaurantManagerController {
 	@PostMapping(path = "/restaurant/saveDish")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void saveDish(@RequestBody Dish dish) {
-		dish = setDish(dish);
+ 		dish = setDish(dish);
 		Restaurant restaurant = findRestaurantForRestaurantManager();
 		dishService.save(dish);
 		restaurant.getFood().add(dish);
@@ -169,6 +168,16 @@ public class RestaurantManagerController {
 	public void saveWaiter(@RequestBody Waiter waiter) {
 		waiter = setObjectWaiter(waiter);
 		Restaurant restaurant = findRestaurantForRestaurantManager();
+		for(int i=0;i<restaurant.getWaiters().size();i++) {
+			if(restaurant.getWaiters().get(i).getId() == waiter.getId()) {
+				for(int j =0;j<restaurant.getWaiters().get(i).getTablesForHandling().size();j++) {
+					for(int k =0;k<waiter.getTablesForHandling().size();k++) {
+						if(restaurant.getWaiters().get(i).getTablesForHandling().get(j).getId() == waiter.getTablesForHandling().get(k).getId())
+							throw new BadRequestException();				
+					}
+				}
+			}
+		}
 		waiterService.save(waiter);
 		restaurant.getWaiters().add(waiter);
 		restaurantService.save(restaurant);
@@ -277,19 +286,23 @@ public class RestaurantManagerController {
 	public void connectBidder(@Valid @RequestBody Bidder bidder) {
 		Bidder bidderOld = bidderService.findOne(bidder.getId());
 		Restaurant restaurant = findRestaurantForRestaurantManager();
+		for(int i=0;i<restaurant.getBidders().size();i++) {
+			if(bidder.getId() == restaurant.getBidders().get(i).getId())
+				throw new BadRequestException();
+		}
 		restaurant.getBidders().add(bidderOld);
 		restaurantService.save(restaurant);
 	}
 
 	@PostMapping(path = "/restaurant/createNewOffer")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createNewOffer(@Valid @RequestBody RestaurantOrderr restaurantOrderr) {
+	public void createNewOffer(@RequestBody RestaurantOrderr restaurantOrderr) {
 		Dish dish = restaurantOrderr.getDish();
 		Drink drink = restaurantOrderr.getDrink();
 		Restaurant restaurant = findRestaurantForRestaurantManager();
 		setObject(dish, drink, restaurant, restaurantOrderr);
-		restaurant.getRestaurantOrders().add(restaurantOrderr);
 		restaurantOrderService.save(restaurantOrderr);
+		restaurant.getRestaurantOrders().add(restaurantOrderr);
 		restaurantService.save(restaurant);
 	}
 
@@ -299,8 +312,7 @@ public class RestaurantManagerController {
 		if (restaurantOrderr.getOrderActive().equals("open")) {
 			restaurantOrderr.setOrderActive("closed");
 			for (int i = 0; i < restaurantOrderr.getOffers().size(); i++) {
-				if (restaurantOrderr.getOffers().get(i).getBidder().getId() == restaurantOrderr
-						.getIdFromChoosenBidder()) {
+				if (restaurantOrderr.getOffers().get(i).getBidder().getId() == restaurantOrderr.getBidderID()) {
 					restaurantOrderr.getOffers().get(i).setAccepted("accepted");
 				} else
 					restaurantOrderr.getOffers().get(i).setAccepted("rejected");
@@ -403,6 +415,7 @@ public class RestaurantManagerController {
 		table.setXPos(pomtab.getXPos());
 		table.setYPos(pomtab.getYPos());
 		table.setId(id);
+		table.setVersion(pomtab.getVersion());
 
 		return tableService.save(table);
 	}

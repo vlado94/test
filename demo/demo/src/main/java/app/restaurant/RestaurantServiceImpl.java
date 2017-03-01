@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 
-import app.guest.Guest;
-
 @Service
 @Transactional
 public class RestaurantServiceImpl implements RestaurantService {

@@ -12,7 +12,7 @@
 	
 	<tr>
 		<td>Time:</td>
-		<td>{{reservation.hours}}:{{reservation.minuts}}</td>
+		<td>{{reservation.hours}}:{{reservation.minutes}}</td>
 	</tr>
 	
 	<tr>
@@ -29,7 +29,7 @@
 <table ng-init="loadTables(restaurant.id)" class = "tablesTable">
 	<tr ng-repeat="row in tables">
 		<td ng-repeat="table in row"> 
-			<button class="tableBtns" ng-if="table.status == 'Exists'" ng-click="selectTable(table)">{{table.name}}</button>
+			<button data-toggle="tooltip" title="{{table.segmentName}}" class="tableBtns" id = {{table.id}} ng-if="table.status == 'Exists'" ng-click="selectTable(table)">{{table.name}}</button>
 			<button class="tableBtns" ng-if="table.status == 'Not Exists'" style="visibility:hidden;"></button>
 			<button class="tableBtns" ng-if="table.status == 'Reserved'" style = "background:red;" disabled>{{table.name}}</button>
 		</td>

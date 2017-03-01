@@ -28,6 +28,12 @@ app.controller('employedWaiterController', [ '$scope', 'employedWaiterService','
 				}
 			);
 			
+			employedWaiterService.employedWaiters().then(
+					function(response){
+						$scope.employedWaiters = response.data;
+					}
+				)
+			
 			employedWaiterService.orders().then(
 				function(response){
 					$scope.orders = response.data;
@@ -64,6 +70,12 @@ app.controller('employedWaiterController', [ '$scope', 'employedWaiterService','
 				}
 			)
 			
+			employedWaiterService.changeOrdersList().then(
+				function(response){
+					$scope.changeOrdersList = response.data;
+				}
+			)
+			
 			$scope.reservation = "";
 		}
 		
@@ -97,6 +109,7 @@ app.controller('employedWaiterController', [ '$scope', 'employedWaiterService','
 			employedWaiterService.sendToEmployed(order.id).then(
 					function(response){
 						$scope.orders.splice($scope.orders.indexOf(order),1);
+						findAll();
 					},
 					function(response){
 						alert("Error while signal");
@@ -105,10 +118,15 @@ app.controller('employedWaiterController', [ '$scope', 'employedWaiterService','
 		}
 		
 		$scope.changeOrder = function(order){
-			employedWaiterService.changeOrder(order.id).then(
+			employedWaiterService.changeOrder(order.id, order.version).then(
 					function(response){
-						$scope.changedOrder = response.data;
-						$location.path('loggedIn/waiter/changeOrder');
+						if(response.data == ""){
+							alert("You can't change this order anymore");
+							findAll();
+						} else {
+							$scope.changedOrder = response.data;
+							$location.path('loggedIn/waiter/changeOrder');
+						}
 			});				
 		}
 		
@@ -161,7 +179,12 @@ app.controller('employedWaiterController', [ '$scope', 'employedWaiterService','
 		}
 		
 		$scope.makeOrder = function(){
-			$location.path('loggedIn/waiter/orders');
+			employedWaiterService.makeOrder($scope.changedOrder.id).then(
+				function(response){
+					$location.path('loggedIn/waiter/orders');
+					findAll();
+				}
+			)
 		}
 		
 		$scope.newOrderDrink = function(drink){
@@ -270,6 +293,7 @@ app.controller('employedWaiterController', [ '$scope', 'employedWaiterService','
 		}
 		
 		
+		
 		$scope.loadTables = function(){
 			employedWaiterService.restaurant().then(
 					function(response){
@@ -318,6 +342,33 @@ app.controller('employedWaiterController', [ '$scope', 'employedWaiterService','
 			
 			
 		});
+		}
+		
+		$scope.changedShift = function(waiter) {
+		    var today = Date.now();
+		    var tomorrow = new Date(Date.now() + 86400000 * 1);
+			var step = 2;
+			var datesArr = [];
+			var temp = 0;
+			if(waiter.defaultShift != "First") 
+				temp = 1;
+			else
+				temp = 0;
+			for(var i = 0;i<300;i++) {
+				day = new Date(Date.now() +temp * 86400000 + 86400000 *  i*step);
+				
+				datesArr.push(day);
+				
+			}
+			
+			
+			$('#date').multiDatesPicker('destroy');
+			$('#date').multiDatesPicker({
+		        numberOfMonths: 1,
+		        addDates: datesArr
+			});
+			if(temp == 1)
+				$('#date').multiDatesPicker('toggleDate', new Date());
 		}
 		
 		

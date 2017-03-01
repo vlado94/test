@@ -1,8 +1,9 @@
 
-<label>Start date</label>
-<input type="date" class="form-control"
-	ng-model="$parent.startDateForShift" required max="2020-12-31">
+<div ng-repeat="cook in employedCooks">
+	<button class = "btn" ng-click = "changedShift(cook)">{{cook.firstname}} {{cook.lastname}}</button>
+</div>
 
-<label>End date</label>
-<input type="date" class="form-control"
-	ng-model="$parentr.endDateForShift" required max="2020-12-31">
+
+<div style="width: 20%; color: #0000FF" class = "reservation">
+	<div id="date"></div>
+</div>

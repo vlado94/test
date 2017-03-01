@@ -96,13 +96,13 @@ public class CommonController {
 				userType = "guest";
 			else
 				userType = "guestNotActivated";
-		} else if (bidderService.findOne(userInput.getMail(), userInput.getPassword()) != null) {
-			user = bidderService.findOne(userInput.getMail(), userInput.getPassword());
-			id = bidderService.findOne(userInput.getMail(), userInput.getPassword()).getId();
+		} else if (bidderService.findOneMailAndPass(userInput.getMail(), userInput.getPassword()) != null) {
+			user = bidderService.findOneMailAndPass(userInput.getMail(), userInput.getPassword());
+			id = bidderService.findOneMailAndPass(userInput.getMail(), userInput.getPassword()).getId();
 			userType = "bidder";
-		} else if (bartenderService.findOne(userInput.getMail(), userInput.getPassword()) != null) {
-			user = bartenderService.findOne(userInput.getMail(), userInput.getPassword());
-			id = bartenderService.findOne(userInput.getMail(), userInput.getPassword()).getId();
+		} else if (bartenderService.findOneMailAndPass(userInput.getMail(), userInput.getPassword()) != null) {
+			user = bartenderService.findOneMailAndPass(userInput.getMail(), userInput.getPassword());
+			id = bartenderService.findOneMailAndPass(userInput.getMail(), userInput.getPassword()).getId();
 			userType = "bartender";
 		} else if (waiterService.findOne(userInput.getMail(), userInput.getPassword()) != null) {
 			user = waiterService.findOne(userInput.getMail(), userInput.getPassword());

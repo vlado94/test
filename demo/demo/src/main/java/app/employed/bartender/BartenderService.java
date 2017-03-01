@@ -11,7 +11,7 @@ public interface BartenderService {
 
 	Bartender findOne(Long id);
 	
-	Bartender findOne(String mail,String password);
+	Bartender findOneMailAndPass(String mail,String password);
 
 	Bartender findOneWithMail(String mail);
 	

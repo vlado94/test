@@ -78,7 +78,7 @@ services.service('guestService', ['$http', function($http){
 	}
 	
 	this.makeOrder = function(tableId, reservationId, order){
-		return $http.post("/guest/makeOrder/"+tableId +"/"+ reservationId, order);
+		return $http.post("/guest/makeOrder/"+tableId.id +"/"+ reservationId, order);
 	}
 	
 
@@ -86,8 +86,8 @@ services.service('guestService', ['$http', function($http){
 		return $http.get("guest/restaurant/getTables/"+id);
 	}
 	
-	this.makeReservation = function(tableId, reservation){
-		return $http.post("guest/makeReservation/"+ tableId, reservation);
+	this.makeReservation = function(id, reservation){
+		return $http.post("guest/makeReservation", reservation);
 	}
 	
 	this.reservations = function(){
@@ -114,7 +114,28 @@ services.service('guestService', ['$http', function($http){
 		return $http.put("/guest/rateService/"+serviceRate +"/"+ order);	
 	}
 	
+	this.acceptInvite = function(id){
+		return $http.post("/guest/acceptInvite/"+id);	
+	}
+	this.rejectInvite = function(id){
+		return $http.post("/guest/rejectInvite/"+id);	
+	}
 	
+	this.avgRateFriends = function(id){
+		return $http.get("/guest/avgRateFriends/" + id);
+	}
+	
+	this.getCurrentReservations = function(){
+		return $http.get("/guest/currentReservations");
+	}
+	
+	this.cancelReservation = function(id){
+		return $http.get("/guest/cancelReservation/"+id);
+	}
+	
+	this.checkTables = function(tables){
+		return $http.post("/guest/checkTables",tables);
+	}
 
 	
 }]);

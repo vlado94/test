@@ -12,7 +12,7 @@ public interface BidderService {
 
 	Bidder findOne(Long id);
 
-	Bidder findOne(String mail, String password);
+	Bidder findOneMailAndPass(String mail, String password);
 
 	Bidder findOneWithMail(String mail);
 
@@ -20,5 +20,5 @@ public interface BidderService {
 
 	ArrayList<RestaurantOrderr> selectAllOffersWhereBidderCompeted(Bidder bidder);
 
-	boolean tryToChangeValueOfOffer(RestaurantOrderr restaurantOrderr, Long bidderId, Bidder bidder);
+	boolean tryToChangeValueOfOffer(RestaurantOrderr restaurantOrderr, Long bidderId);
 }

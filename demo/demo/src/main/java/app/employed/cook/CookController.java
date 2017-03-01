@@ -10,7 +10,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -27,7 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import app.dish.Dish;
 import app.employed.DefaultShift;
-import app.employed.waiter.Waiter;
+import app.manager.changedShiftCook.ChangedShiftCook;
+import app.manager.changedShiftCook.ChangedShiftCookService;
 import app.order.FoodStatus;
 import app.order.OrderService;
 import app.order.Orderr;
@@ -46,16 +46,18 @@ public class CookController {
 	private final CookOrderService cookOrderService;
 	private final ReservationService reservationService;
 	private final RestaurantService restaurantService;
-
+	private final ChangedShiftCookService changedShiftService;
 	@Autowired
 	public CookController(final HttpSession httpSession, final CookService cookService, final OrderService orderService,
-			final CookOrderService cookOrderService, final ReservationService reservationService, final RestaurantService restaurantService) {
+			final CookOrderService cookOrderService, final ReservationService reservationService, final RestaurantService restaurantService,
+			final ChangedShiftCookService changedShiftService) {
 		this.httpSession = httpSession;
 		this.cookService = cookService;
 		this.orderService = orderService;
 		this.cookOrderService = cookOrderService;
 		this.reservationService = reservationService;
 		this.restaurantService = restaurantService;
+		this.changedShiftService = changedShiftService;
 		
 	}
 
@@ -117,6 +119,22 @@ public class CookController {
 				.orElseThrow(() -> new ResourceNotFoundException("Resource Not Found!"));
 		cook.setId(id);
 		return cookService.save(cook);
+	}
+	
+	@GetMapping(path = "/employedCooks")
+	public List<Cook> employedCooks(){
+		Long id = ((Cook) httpSession.getAttribute("user")).getId();
+		Cook cook = cookService.findOne(id);
+		Restaurant restaurant = new Restaurant();
+		for(int i = 0 ; i < restaurantService.findAll().size(); i++){
+			for(int j = 0 ; j < restaurantService.findAll().get(i).getCooks().size(); j++){
+				if(restaurantService.findAll().get(i).getCooks().get(j).getId() == cook.getId()){
+					restaurant = restaurantService.findAll().get(i);
+				}
+			}
+		}
+		
+		return restaurant.getCooks();
 	}
 
 	// 2.4 vidi listu porudzbina jela koje je potrebno pripremiti
@@ -211,9 +229,9 @@ public class CookController {
 		
 	}
 
-	@GetMapping(path = "/foodReceived/{orderId}")
+	@GetMapping(path = "/foodReceived/{orderId}/{versionId}")
 	@ResponseStatus(HttpStatus.OK)
-	public Orderr foodReceived(@PathVariable Long orderId) {
+	public Orderr foodReceived(@PathVariable Long orderId, @PathVariable Integer versionId) {
 		Long id = ((Cook) httpSession.getAttribute("user")).getId();
 		Cook cook = cookService.findOne(id);
 		Optional.ofNullable(cook).orElseThrow(() -> new ResourceNotFoundException("Resource Not Found!"));
@@ -222,7 +240,10 @@ public class CookController {
 				.orElseThrow(() -> new ResourceNotFoundException("Resource Not Found!"));
 
 		Orderr order = orderService.findOne(orderId);
-
+		if(order.getChangeStatus() != null || order.getChangeVersion() != versionId)
+			return null;
+		order.setCheckVersion(order.getCheckVersion() + 1);
+		orderService.save(order);
 		CookOrder cookOrder = new CookOrder();
 		cookOrder.setOrder(order);
 		cookOrder.setCook(cook);
@@ -342,7 +363,24 @@ public class CookController {
 		}
 		
 		return order;
-
+	}
+	
+	@GetMapping("/changedShiftDate/{cookId}")
+	public List<Date> changedShiftDate(@PathVariable Long cookId){
+		
+		Cook cook = cookService.findOne(cookId);
+		
+		List<ChangedShiftCook> changedShifts = changedShiftService.findAll();
+		List<Date> dates = new ArrayList<Date>();
+		for(int i = 0 ; i < changedShifts.size(); i++){
+			if(changedShifts.get(i).getCook1().getId() == cook.getId()){
+				dates.add(changedShifts.get(i).getDate());
+			} else if (changedShifts.get(i).getCook2().getId() == cook.getId()){
+				dates.add(changedShifts.get(i).getDate());
+			}
+		}
+		
+		return dates;
 	}
 	
 	public List<Reservation> getActiveReservations(List<Reservation> reservations, Cook cook){

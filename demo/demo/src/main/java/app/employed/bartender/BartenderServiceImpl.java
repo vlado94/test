@@ -41,7 +41,7 @@ public class BartenderServiceImpl implements BartenderService {
 	}
 
 	@Override
-	public Bartender findOne(String mail, String password) {
+	public Bartender findOneMailAndPass(String mail, String password) {
 		List<Bartender> bartenders = (List<Bartender>) repository.findAll();
 		for (int i = 0; i < bartenders.size(); i++) {
 			if (bartenders.get(i).getMail().equals(mail) && bartenders.get(i).getPassword().equals(password))

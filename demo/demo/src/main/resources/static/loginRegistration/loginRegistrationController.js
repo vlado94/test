@@ -16,7 +16,7 @@ app.controller('loginRegistrationController', ['$scope','loginRegistrationServic
                     else if(response.data === "restaurant")
                     	$location.path('loggedIn/restaurantManager/info');
                     else if(response.data === "guest")
-                    	$location.path('loggedIn/guest/home');
+                    	$location.path('loggedIn/guest/restaurants');
                     else if(response.data ==="guestNotActivated")
                     	$location.path('loggedIn/notActivated');
                     else if(response.data === "bidder")

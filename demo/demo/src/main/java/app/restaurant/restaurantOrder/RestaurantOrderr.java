@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 import app.dish.Dish;
@@ -28,6 +29,10 @@ public class RestaurantOrderr {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "RESTAURANT_ORDER_ID")
 	private Long id;
+	
+	@Version
+	@Column(name="OPTLOCK")
+	private Integer lock;
 
 	@Column
 	private String orderActive;
@@ -54,5 +59,5 @@ public class RestaurantOrderr {
 	private List<Offer> offers;
 	
 	@Column
-	private Long idFromChoosenBidder;
+	private Long bidderID;
 }

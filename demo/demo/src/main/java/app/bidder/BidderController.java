@@ -54,7 +54,8 @@ public class BidderController {
 		bidder.setPassword(password);
 		bidder.setFirstname(firstName);
 		bidder.setLastname(lastName);
-		return bidderService.save(bidder);
+		Bidder bidderr = bidderService.save(bidder);
+		return bidderr;
 	}
 	
 	@GetMapping("/checkRights")
@@ -71,22 +72,27 @@ public class BidderController {
 	@GetMapping("/getOffers")
 	@ResponseStatus(HttpStatus.OK)
 	public ArrayList<RestaurantOrderr> getOffers() {
-		Bidder bidder = ((Bidder) httpSession.getAttribute("user"));
-		ArrayList<RestaurantOrderr> restaurantOrderrs = new ArrayList<>();
-		List<Restaurant> restaurants = restaurantService.findAll();
-		for (int i = 0; i < restaurants.size(); i++) {
-			Restaurant restaurant = restaurants.get(i);
-			for (int j = 0; j < restaurant.getRestaurantOrders().size(); j++) {
-				RestaurantOrderr restaurantOrderr = restaurant.getRestaurantOrders().get(j);
-				for (int q = 0; q < restaurantOrderr.getOffers().size(); q++) {
-					Offer offer = restaurantOrderr.getOffers().get(q);
-					if (offer.getBidder().getId() == bidder.getId()) {
-						restaurantOrderrs.add((restaurants.get(i).getRestaurantOrders().get(j)));
+		try {
+			Bidder bidder = ((Bidder) httpSession.getAttribute("user"));
+			ArrayList<RestaurantOrderr> restaurantOrderrs = new ArrayList<>();
+			List<Restaurant> restaurants = restaurantService.findAll();
+			for (int i = 0; i < restaurants.size(); i++) {
+				Restaurant restaurant = restaurants.get(i);
+				for (int j = 0; j < restaurant.getRestaurantOrders().size(); j++) {
+					RestaurantOrderr restaurantOrderr = restaurant.getRestaurantOrders().get(j);
+					for (int q = 0; q < restaurantOrderr.getOffers().size(); q++) {
+						Offer offer = restaurantOrderr.getOffers().get(q);
+						if (offer.getBidder().getId() == bidder.getId()) {
+							restaurantOrderrs.add((restaurants.get(i).getRestaurantOrders().get(j)));
+						}
 					}
 				}
 			}
+			return restaurantOrderrs;
+		}catch(Exception e) {
+			throw new BadRequestException();
 		}
-		return restaurantOrderrs;
+
 	}
 
 	// izlistavanje svih ponuda za logovanog ponudjaca od svih restorana gde
@@ -94,31 +100,36 @@ public class BidderController {
 	@GetMapping("/getActiveOffers")
 	@ResponseStatus(HttpStatus.OK)
 	public List<RestaurantOrderr> getActiveOffers() {
-		Bidder bidder = ((Bidder) httpSession.getAttribute("user"));
-		ArrayList<RestaurantOrderr> restaurantOrderrs = bidderService.selectAllOffersWhereBidderCompeted(bidder);
-		return restaurantOrderrs;
+		try {
+			Bidder bidder = ((Bidder) httpSession.getAttribute("user"));
+			ArrayList<RestaurantOrderr> restaurantOrderrs = bidderService.selectAllOffersWhereBidderCompeted(bidder);
+			return restaurantOrderrs;
+		}catch(Exception e) {
+			throw new BadRequestException();
+		}
 	}
 
 	// izmena vrednosti aktivne ponude
-	@PostMapping("/changeOffer/{id}")
+	@PostMapping("/changeOffer/{id}/{lock}")
 	@ResponseStatus(HttpStatus.OK)
-	public String changeOffer(@PathVariable Long id,@Valid @RequestBody Offer offer) {
+	public String changeOffer(@PathVariable Long id,@PathVariable Integer lock, @RequestBody Offer offer) {
 		RestaurantOrderr restaurantOrder = restaurantOrderrService.findOne(id);
-		List<Offer> listOfOffers = restaurantOrder.getOffers();
-		for (int j = 0; j < listOfOffers.size(); j++) {
-			if (listOfOffers.get(j).getId() == offer.getId()) {
-				if (restaurantOrder.getEndDate().getTime() > offer.getPosibleDelivery().getTime() && offer.getPosibleDelivery().getTime() > restaurantOrder.getStartDate().getTime()
-					&& restaurantOrder.getOrderActive().equals("open")) {
-					//glupost al da ne pravim bzv drugi objekat
-					listOfOffers.get(j).setPrice(offer.getPrice());
-					listOfOffers.get(j).setGaranty(offer.getGaranty());
-					listOfOffers.get(j).setPosibleDelivery(offer.getPosibleDelivery());
-					restaurantOrderrService.save(restaurantOrder);
-					return "ok";
+		if(restaurantOrder.getLock() == lock) {
+			List<Offer> listOfOffers = restaurantOrder.getOffers();
+			for (int j = 0; j < listOfOffers.size(); j++) {
+				if (listOfOffers.get(j).getId() == offer.getId()) {
+					if (restaurantOrder.getEndDate().getTime() > offer.getPosibleDelivery().getTime() && offer.getPosibleDelivery().getTime() > restaurantOrder.getStartDate().getTime()
+						&& restaurantOrder.getOrderActive().equals("open")) {
+						//glupost al da ne pravim bzv drugi objekat
+						listOfOffers.get(j).setPrice(offer.getPrice());
+						listOfOffers.get(j).setGaranty(offer.getGaranty());
+						listOfOffers.get(j).setPosibleDelivery(offer.getPosibleDelivery());
+						restaurantOrderrService.save(restaurantOrder);
+						return "ok";
+					}
 				}
 			}
 		}
-
 		return "no";
 	}
 
@@ -129,7 +140,7 @@ public class BidderController {
 		Long bidderId = ((Bidder) httpSession.getAttribute("user")).getId();
 		Bidder bidder = bidderService.findOne(bidderId);
 		if(!checkIfMakedOfferEarlier(restaurantOrderr,bidder) && offer.getPosibleDelivery().before(restaurantOrderr.getEndDate()) && offer.getPosibleDelivery().after(restaurantOrderr.getStartDate()))
-			if (bidderService.tryToChangeValueOfOffer(restaurantOrderr, bidderId, bidder)) {
+			if (bidderService.tryToChangeValueOfOffer(restaurantOrderr, bidderId)) {
 				offer.setAccepted("in progress");
 				offer.setBidder(bidder);
 				offerService.save(offer);
