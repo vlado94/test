@@ -54,7 +54,6 @@ import app.restaurant.Segment;
 import app.restaurant.SegmentService;
 import app.restaurant.Table;
 import app.restaurant.TableService;
-import net.minidev.asm.ex.ConvertException;
 
 @RestController
 @RequestMapping("/guest")
