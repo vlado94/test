@@ -310,7 +310,8 @@ public class RestaurantManagerController {
 	@PostMapping(path = "/restaurant/acceptRestaurantOrder")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public void acceptRestaurantOrder(@Valid @RequestBody RestaurantOrderr restaurantOrderr) {
-		if (restaurantOrderr.getOrderActive().equals("open")) {
+		RestaurantOrderr restaurantOrderr1 = restaurantOrderService.findOne(restaurantOrderr.getId());
+		if (restaurantOrderr1.getOrderActive().equals("open")) {
 			restaurantOrderr.setOrderActive("closed");
 			for (int i = 0; i < restaurantOrderr.getOffers().size(); i++) {
 				if (restaurantOrderr.getOffers().get(i).getBidder().getId() == restaurantOrderr.getBidderID()) {
