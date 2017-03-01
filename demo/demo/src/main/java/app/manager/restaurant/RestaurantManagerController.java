@@ -2,6 +2,7 @@ package app.manager.restaurant;
 
 import java.time.DateTimeException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -412,12 +413,24 @@ public class RestaurantManagerController {
 		System.out.println(
 				"idemo cuvati tabelu: " + table.getName() + " " + table.getSegmentName() + " " + table.getStatus());
 		app.restaurant.Table pomtab = tableService.findOne(id);
-		table.setXPos(pomtab.getXPos());
-		table.setYPos(pomtab.getYPos());
-		table.setId(id);
-		table.setVersion(pomtab.getVersion());
-
-		return tableService.save(table);
+		if(pomtab != null)
+			if(table.getVersion() == pomtab.getVersion() && !checkIfHaveReservation(pomtab)) {
+				table.setXPos(pomtab.getXPos());
+				table.setYPos(pomtab.getYPos());
+				table.setId(id);
+				table.setVersion(pomtab.getVersion());
+				return tableService.save(table);
+			}
+		return null;
+	}
+	
+	private boolean checkIfHaveReservation(app.restaurant.Table table) {
+		java.sql.Date current = new java.sql.Date(Calendar.getInstance().getTime().getTime());for(int i=0;i<table.getReservations().size();i++) {
+		for(int j = 0;j<table.getReservations().size();j++)
+			if(table.getReservations().get(j).getDate().after(current))
+				return true;
+		}
+		return false;
 	}
 
 	// fali da se ubaci provera da se ne poklapaju kuvari

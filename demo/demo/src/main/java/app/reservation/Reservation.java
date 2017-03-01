@@ -22,7 +22,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import app.guest.Guest;
 import app.order.Orderr;
 import app.restaurant.Restaurant;
-import app.restaurant.Table;
 import lombok.Data;
 
 @Data

@@ -312,11 +312,13 @@ app.controller('restaurantManagerController', ['$scope','$window','restaurantMan
 		}
 		
 		
-		$scope.openModal = function(id){
+		$scope.openModal = function(id,version
+				){
 			restaurantManagerService.getSegments().then(
 				function(response){
 					$scope.segments = response.data;
 					$scope.tableId = id;
+					$scope.versionTable = version
 					var modal = document.getElementById('myModal');
 					modal.style.display = "block";
 				});
@@ -325,11 +327,18 @@ app.controller('restaurantManagerController', ['$scope','$window','restaurantMan
 		
 		
 		$scope.closeModal = function(){
+			$scope.table.version = $scope.versionTable;
 			restaurantManagerService.updateTable($scope.tableId, $scope.table).then(
 				function(response){
-					var modal = document.getElementById('myModal');
-					modal.style.display = "none";
-					$window.location.reload();
+					if(response.data != "") {
+						var modal = document.getElementById('myModal');
+						modal.style.display = "none";
+						$window.location.reload();
+					}
+					else {
+	                    alert("Error in changing.");
+						$window.location.reload();
+					}
 				});
 		}
 		

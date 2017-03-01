@@ -16,7 +16,7 @@ Max on y-axis: <input name="xaxis" type="number" value="1"><br/>
 <table ng-init="loadTables()" class = "tablesTable">
 	<tr ng-repeat="row in tables">
 		<td ng-repeat="table in row"> 
-			<button class="tableBtns" ng-click="openModal(table.id)"><label ng-if="table.status == 'Exists'">{{table.name}}</label></button>
+			<button class="tableBtns" ng-click="openModal(table.id,table.version)"><label ng-if="table.status == 'Exists'">{{table.name}}</label></button>
 		</td>
 				
 	</tr>
