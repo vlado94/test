@@ -407,6 +407,7 @@ public class GuestController {
 		return reservationService.findAll();		
 	}
 	
+	@SuppressWarnings("deprecation")
 	@GetMapping(path="/currentReservations")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Reservation> getcurrentReservations(){
@@ -419,7 +420,17 @@ public class GuestController {
 				if(guests.get(j).getId()== guestId ){
 					Date today = new Date(Calendar.getInstance().getTime().getTime());
 					Date resDate = reservations.get(i).getDate();
-					if(today.before(resDate))
+					
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(today);
+					int hours = cal.get(Calendar.HOUR_OF_DAY);
+					int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+					
+					cal.setTime(resDate);
+					int resDay = cal.get(Calendar.DAY_OF_MONTH);
+					System.out.println("now: "+hours+ " resH: "+reservations.get(i).getHours());
+					
+					if( today.before(resDate) || (day == resDay && hours<reservations.get(i).getHours()) )
 						out.add(reservations.get(i));
 				}
 			}
